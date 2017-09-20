@@ -1,15 +1,15 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+    <div id="app">
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
-  export default {
+export default {
     name: 'app'
-  }
+}
 </script>
 
 <style lang="scss">
-  @import 'src/assets/style/_base.less';
+@import 'src/assets/style/_base.less';
 </style>
