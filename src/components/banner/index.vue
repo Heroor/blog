@@ -4,15 +4,15 @@
       <img :src="src" ondragstart="return false">
     </div>
     <div class="article-title">
-      <h1 class="trans-font">{{articleInfo.title}}</h1>
-      <p class="desc trans-font">{{articleInfo.desc}}</p>
+      <h1 class="trans-font">{{title}}</h1>
+      <p class="desc trans-font">{{desc}}</p>
     </div>
   </section>
 </template>
 
 <script>
   export default {
-    props: ['src', 'articleInfo']
+    props: ['src', 'title', 'desc']
   }
 
 </script>

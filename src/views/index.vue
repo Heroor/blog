@@ -1,15 +1,18 @@
 <template>
   <div>
     <!-- 导航 -->
-    <nav-bar :nav-list="navList"></nav-bar>
+    <nav-bar :list="navList"></nav-bar>
 
     <!-- 头图 -->
-    <banner :src="bannerImgSrc" :article-info="articleInfo"></banner>
+    <banner :src="bannerImgSrc" :desc="articleInfo.desc" :title="articleInfo.title"></banner>
+    <articleItem :list="articleList"></articleItem>
+    <p class="hosted">Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
   </div>
 </template>
 
 <script>
   import navBar from '../components/nav'
+  import article from '../components/article'
   import banner from '../components/banner'
   export default {
     data() {
@@ -24,12 +27,20 @@
         articleInfo: {
           title: 'Here is the title of the article',
           desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi cumque deserunt tempore optio non? Recusandae eius esse laudantium ipsa eveniet animi numquam ut, est dolorum ratione? Aspernatur debitis quas modi?'
-        }
+        },
+        articleList: [
+          {title: 'aaaaaaaaaaaaaaaa', desc: 'dddddddddddddddddddddd', date: '2017-5-6', img: '#',  href: "#"},
+          {title: '阿斯达所大所多撒', desc: '阿斯达所大所多撒阿斯达所大所多撒阿斯达所大所多撒阿斯达所大所多撒阿斯达所大所多撒', date: '2017-5-6', img: '#',  href: "#"},
+          {title: 'aaaaaaaaaaaaaaaa', desc: 'dddddddddddddddddddddd', date: '2017-5-6', img: '#',  href: "#"},
+          {title: 'aaaaaaaaaaaaaaaa', desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi cumque deserunt tempore optio non? Recusandae eius esse laudantium ipsa eveniet animi numquam ut, est dolorum ratione? Aspernatur debitis quas modi', date: '2017-5-6', img: '#',  href: "#"},
+          {title: 'aaaaaaaaaaaaaaaa', desc: 'dddddddddddddddddddddd', date: '2017-5-6', img: '#',  href: "#"},
+        ]
       }
     },
     components: {
       navBar,
       banner,
+      articleItem: article,
     }
   }
 
@@ -44,6 +55,9 @@
 
   ul li a.router-link-active {
     // color: #7bdde9;
+  }
+  .hosted {
+    text-align: center;
   }
 
 </style>

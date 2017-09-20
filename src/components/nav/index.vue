@@ -1,7 +1,7 @@
 <template>
   <nav class="nav">
     <ul>
-      <li v-for="(item, index) in navList" :key="index" class="underline">
+      <li v-for="(item, index) in list" :key="index" class="underline">
         <router-link :to="item.href">{{item.tag}}</router-link>
       </li>
     </ul>
@@ -13,7 +13,7 @@
 
 <script>
   export default {
-    props: ['navList'],
+    props: ['list'],
   }
 
 </script>
