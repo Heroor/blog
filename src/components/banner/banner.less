@@ -1,0 +1,57 @@
+.banner {
+  background-color: #343434;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  .content {
+    height: 420px;
+    width: 280%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #fff;
+    img {
+      width: 100vw;
+      min-width: 1600px;
+      min-height: 400px;
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      opacity: .9;
+    }
+  }
+  .article-title {
+    width: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    padding: 50px;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .15);
+    h1 {
+      font-size: 30px;
+      word-spacing: 5px;
+      margin-bottom: 15px;
+      position: relative;
+      &::after {
+        content: '';
+        width: 100%;
+        height: 2px;
+        background: #fff;
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        border-radius: 1px;
+      }
+    }
+    .desc {
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+}

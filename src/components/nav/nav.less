@@ -1,0 +1,56 @@
+.nav {
+  width: 100%;
+  background: #343434;
+  position: relative;
+  ul {
+    display: flex;
+    justify-content: center;
+    li {
+      margin: 0 12px;
+      a {
+        line-height: 50px;
+        display: inline-block;
+        color: #fff;
+        padding: 0 8px;
+      }
+      &::after {
+        bottom: 10px;
+      }
+    }
+  }
+  .left,
+  .right {
+    position: absolute;
+    height: 64px;
+    width: 60px;
+    top: 0;
+    left: -10px;
+    &::after {
+      content: '';
+      width: 1px;
+       //   height: 80%;
+      height: 0;
+      position: absolute;
+      right: 0;
+      top: 10px;
+      border-radius: 1px;
+    }
+  }
+  .right {
+    left: auto;
+    right: -10px;
+    &::after {
+      left: 0;
+    }
+  }
+  &:hover {
+    .left,
+    .right {
+      &::after {
+        transition: all .2s ease-out;
+        background: #aaa;
+        height: 80%;
+      }
+    }
+  }
+}
