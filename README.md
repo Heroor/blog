@@ -1,2 +1,0 @@
-# blog
-Bener' blog
