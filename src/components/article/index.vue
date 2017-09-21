@@ -6,12 +6,12 @@
                     <a :href="item.href">{{item.title}}</a>
                 </h3>
                 <div class="content">
+                    <div class="right">
+                        <img class="img" :src="item.img">
+                    </div>
                     <div class="left">
                         <p class="desc">{{item.desc}}</p>
                         <span class="date">{{item.date}}</span>
-                    </div>
-                    <div class="right">
-                        <img class="img" :src="item.img">
                     </div>
                 </div>
             </li>
@@ -25,6 +25,7 @@ export default {
 
 </script>
 <style scoped lang="scss">
+@import 'src/assets/style/_common.scss';
 ul {
     li {
         display: block;
@@ -37,6 +38,7 @@ ul {
             margin-bottom: 30px;
         }
         .content {
+            @include clearfix();
             .left {
                 overflow: hidden;
                 height: 100%;
@@ -44,6 +46,7 @@ ul {
                     font-size: 18px;
                     text-indent: 2em;
                     margin-bottom: 10px;
+                    color: $font-black;
                 }
             }
             .right {
