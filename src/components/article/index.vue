@@ -27,36 +27,48 @@ export default {
 <style scoped lang="scss">
 @import 'src/assets/style/_common.scss';
 ul {
+    padding-bottom: 200px;
     li {
         display: block;
-        margin: 0 auto;
-        width: 80%;
-        margin-top: 50px;
+        padding: 40px 30px;
+        margin-top: 25px;
+        box-shadow: 3px 3px 10px rgba(5,5,5,.2);
+        border-radius: 6px;
         h3 {
+            padding-right: 180px;
             text-align: center;
             font-size: 26px;
             margin-bottom: 30px;
+            word-break: break-word;
         }
         .content {
             @include clearfix();
             .left {
                 overflow: hidden;
+                padding-right: 20px;
                 height: 100%;
+                // display: flex;
+                // flex-direction: column;
+                // justify-content: space-between;
                 .desc {
                     font-size: 18px;
                     text-indent: 2em;
-                    margin-bottom: 10px;
-                    color: $font-black;
+                    margin-bottom: 15px;
+                    word-break: break-all;
+                    line-height: 1.5;
+                }
+                .date {
+                    color: $font-color-tips;
                 }
             }
             .right {
                 float: right;
-                width: 150px;
-                height: 150px;
                 .img {
-                    width: 100%;
-                    height: 100%;
+                    max-width: 180px;
+                    max-height: 180px;
                     display: block;
+                    border-radius: 6px;
+                    border: 1px solid #ddd;
                 }
             }
         }

@@ -18,5 +18,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './banner.less';
+@import './banner.scss';
 </style>

@@ -19,5 +19,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './nav.less';
+@import './nav.scss';
 </style>
