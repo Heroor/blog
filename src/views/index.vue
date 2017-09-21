@@ -29,7 +29,8 @@ export default {
                 { tag: 'Info', href: '/info' },
                 { tag: 'Search', href: '/search' },
             ],
-            bannerImgSrc: 'http://oueon55l6.bkt.clouddn.com/5.jpg',
+            // bannerImgSrc: 'http://oueon55l6.bkt.clouddn.com/5.jpg',
+            bannerImgSrc: 'static/images/bg1.jpg',
             articleInfo: {
                 title: 'Here is the title of the article',
                 desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi cumque deserunt tempore optio non? Recusandae eius esse laudantium ipsa eveniet animi numquam ut, est dolorum ratione? Aspernatur debitis quas modi?'
