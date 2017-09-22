@@ -3,7 +3,8 @@
         <ul>
             <li v-for="(item, index) in list" :key="index" class="transition-05">
                 <h3 class="t-a-c w-b-bw">
-                    <a :href="item.href" class="transition-03">{{item.title}}</a>
+                    <!-- <a :href="item.href" class="transition-03">{{item.title}}</a> -->
+                    <router-link :to="item.href" class="transition-03">{{item.title}}</router-link>
                 </h3>
                 <div class="content">
                     <div class="right">

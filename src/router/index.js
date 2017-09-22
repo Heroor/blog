@@ -18,6 +18,15 @@ export default new Router({
           name: 'list',
           path: '/',
           component: _ => import('@/components/article')
+        },
+
+
+
+        // articles
+        {
+          name: '2017-9-22-15-31',
+          path: '/article/2017-9-22-15-31',
+          component: _ => import('@/views/articles/2017-9-22-15-31.vue')
         }
       ]
     }]
