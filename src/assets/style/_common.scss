@@ -1,0 +1,17 @@
+/* color */
+$font-color-title: #343434;
+$font-color-tips: #aaa;
+
+
+/* mixins */
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}

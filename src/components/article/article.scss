@@ -1,0 +1,61 @@
+@import 'src/assets/style/_common.scss';
+ul {
+  padding-bottom: 200px;
+  li {
+    display: block;
+    padding: 40px 30px;
+    margin-top: 25px;
+    border-radius: 6px;
+    background: #fff;
+    &:hover {
+       box-shadow: 0 8px 20px #E6E6E6;
+    }
+    h3 {
+      // padding-right: 180px;
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 30px;
+      word-break: break-word;
+    }
+    .content {
+      @include clearfix();
+      .left {
+        overflow: hidden;
+        padding-right: 20px;
+        height: 100%; // display: flex;
+        // flex-direction: column;
+        // justify-content: space-between;
+        .desc {
+          font-size: 18px;
+          text-indent: 2em;
+          margin-bottom: 15px;
+          word-break: break-all;
+          line-height: 1.5;
+        }
+        .date {
+          color: $font-color-tips;
+        }
+      }
+      .right {
+        float: right;
+        .img {
+          max-width: 180px;
+          max-height: 180px;
+          display: block;
+          border-radius: 6px;
+          // border: 1px solid #ddd;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .right {
+    float: none !important;
+    .img {
+      transition: all .5s ease;
+      margin: 0 auto 20px;
+    }
+  }
+}
