@@ -15,6 +15,7 @@
         padding: 0 8px;
         &.router-link-active::after {
           width: 100%;
+          border-radius: 1px;
         }
         &::after {
           bottom: 10px;
