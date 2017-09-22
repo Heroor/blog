@@ -5,8 +5,11 @@ ul {
     display: block;
     padding: 40px 30px;
     margin-top: 25px;
-    box-shadow: 3px 3px 10px rgba(5, 5, 5, .2);
     border-radius: 6px;
+    background: #fff;
+    &:hover {
+       box-shadow: 0 8px 20px #E6E6E6;
+    }
     h3 {
       // padding-right: 180px;
       text-align: center;
@@ -40,9 +43,19 @@ ul {
           max-height: 180px;
           display: block;
           border-radius: 6px;
-          border: 1px solid #ddd;
+          // border: 1px solid #ddd;
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .right {
+    float: none !important;
+    .img {
+      transition: all .5s ease;
+      margin: 0 auto 20px;
     }
   }
 }

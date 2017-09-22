@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul>
-            <li v-for="(item, index) in list" :key="index">
+            <li v-for="(item, index) in list" :key="index" class="transition-05">
                 <h3>
                     <a :href="item.href">{{item.title}}</a>
                 </h3>
