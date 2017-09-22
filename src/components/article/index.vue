@@ -1,16 +1,16 @@
 <template>
-    <div>
+    <div class="home-article-list">
         <ul>
             <li v-for="(item, index) in list" :key="index" class="transition-05">
-                <h3>
-                    <a :href="item.href">{{item.title}}</a>
+                <h3 class="t-a-c w-b-bw">
+                    <a :href="item.href" class="transition-03">{{item.title}}</a>
                 </h3>
                 <div class="content">
                     <div class="right">
-                        <img class="img" :src="item.img">
+                        <img class="img transition-05" :src="item.img">
                     </div>
                     <div class="left">
-                        <p class="desc">{{item.desc}}</p>
+                        <p class="desc w-b-bw">{{item.desc}}</p>
                         <span class="date">{{item.date}}</span>
                     </div>
                 </div>

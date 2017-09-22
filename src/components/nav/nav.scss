@@ -1,8 +1,7 @@
 @import 'src/assets/style/_common.scss';
-
 .nav {
   width: 100%;
-  background-color: $nav-bg-color;
+  background-color: $nav-bg;
   position: relative;
   ul {
     display: flex;
@@ -14,9 +13,12 @@
         display: inline-block;
         color: $nav-color;
         padding: 0 8px;
-      }
-      &::after {
-        bottom: 10px;
+        &.router-link-active::after {
+          width: 100%;
+        }
+        &::after {
+          bottom: 10px;
+        }
       }
     }
   }
