@@ -1,9 +1,19 @@
-/* color */
+// color
+
 $font-color-title: #343434;
 $font-color-tips: #aaa;
+$nav-bg-color: #89d4a7;
+$nav-color: #fff;
+
+$red: #fe7a59;
+$dark: #000;
+$black-more: #333;
+$black: #555;
+$gray: #ababab;
 
 
-/* mixins */
+
+//  mixins
 
 @mixin clearfix() {
   &:before,
@@ -14,4 +24,21 @@ $font-color-tips: #aaa;
   &:after {
     clear: both;
   }
+}
+
+
+// common class
+
+// 全局缓动动画类
+.transition-1 {
+  transition: all 1s ease;
+}
+.transition-05 {
+  transition: all .5s ease;
+}
+.transition-03 {
+  transition: all .3s ease;
+}
+.transition-01 {
+  transition: all .1s ease;
 }

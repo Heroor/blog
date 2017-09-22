@@ -1,6 +1,8 @@
+@import 'src/assets/style/_common.scss';
+
 .nav {
   width: 100%;
-  background: #343434;
+  background-color: $nav-bg-color;
   position: relative;
   ul {
     display: flex;
@@ -10,7 +12,7 @@
       a {
         line-height: 50px;
         display: inline-block;
-        color: #fff;
+        color: $nav-color;
         padding: 0 8px;
       }
       &::after {
