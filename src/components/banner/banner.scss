@@ -1,5 +1,4 @@
 @import 'src/assets/style/_common.scss';
-
 .banner {
   background-color: $nav-bg;
   height: 400px;
@@ -25,7 +24,6 @@
       top: 10%;
       transform: translate(-50%, -50%);
       opacity: .8;
-      filter: blur(3px);
     }
   }
   .article-title {
@@ -55,6 +53,16 @@
     .desc {
       font-size: 16px;
       line-height: 20px;
+    }
+  } // 进入文章详情页时头图的样式
+  &.open {
+    .article-title {
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 5px;
+      margin: 60px;
+    }
+    img{
+      filter: blur(3px);
     }
   }
 }
