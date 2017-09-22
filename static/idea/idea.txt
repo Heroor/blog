@@ -1,0 +1,25 @@
+页面跳转过度：
+https://ant.design/docs/spec/transition-cn
+https://motion.ant.design/exhibition/demo/detail-switch
+https://motion.ant.design/components/queue-anim#components-queue-anim-demo-simple
+
+文章列表客片悬浮：
+https://motion.ant.design/exhibition/demo/list-sort
+	box-shadow: 0 8px 20px #E6E6E6;
+	transform: scale(1.1) !important;
+
+图片等详情弹窗特效：
+https://motion.ant.design/exhibition/demo/pic-details-anim
+
+四种状态的颜色：
+http://design.alipay.com/design/mobile/icon
+
+颜色标准大全：
+http://design.alipay.com/design/web/colors
+http://design.alipay.com/design/web/font
+
+数字字体： lcletter
+
+
+
+-webkit-font-smoothing: antialiased;
