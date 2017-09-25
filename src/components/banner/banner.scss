@@ -1,19 +1,16 @@
 @import 'src/assets/style/_common.scss';
-
 .banner {
-  background-color: $nav-bg-color;
+  background-color: $nav-bg;
   height: 400px;
   position: relative;
-  top: -1px;
+  top: -2px;
   overflow: hidden;
   margin-bottom: 50px;
   .content {
+    @include translateX-center();
+    top: 0;
     height: 420px;
     width: 280%;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
     border-radius: 50%;
     overflow: hidden;
     background-color: #fff;
@@ -26,7 +23,7 @@
       left: 50%;
       top: 10%;
       transform: translate(-50%, -50%);
-      opacity: .9;
+      opacity: .8;
     }
   }
   .article-title {
@@ -57,5 +54,21 @@
       font-size: 16px;
       line-height: 20px;
     }
+  } // 进入文章详情页时头图的样式
+  &.open {
+    .article-title {
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 5px;
+      margin: 60px;
+    }
+    img{
+      filter: blur(3px);
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .banner .article-title {
+    width: 100%;
   }
 }

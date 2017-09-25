@@ -1,8 +1,8 @@
 <template>
     <nav class="nav">
         <ul>
-            <li v-for="(item, index) in list" :key="index" class="underline">
-                <router-link :to="item.href">{{item.tag}}</router-link>
+            <li v-for="(item, index) in list" :key="index">
+                <router-link :to="item.href"  class="underline">{{item.tag}}</router-link>
             </li>
         </ul>
         <!-- 顶部左右功能键 -->

@@ -1,11 +1,11 @@
 <template>
     <section class="banner">
         <div class="content">
-            <img :src="src" ondragstart="return false">
+            <img :src="src" ondragstart="return false" class="transition-05">
         </div>
-        <div class="article-title">
-            <h1 class="trans-font">{{title}}</h1>
-            <p class="desc trans-font">{{desc}}</p>
+        <div class="article-title transition-05">
+            <h1 class="transition-05">{{title}}</h1>
+            <p class="desc transition-05">{{desc}}</p>
         </div>
     </section>
 </template>

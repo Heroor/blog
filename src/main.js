@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import scrollPage from './assets/script/scrollPage'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -11,5 +12,8 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  mounted() {
+    scrollPage()
+  }
 })
