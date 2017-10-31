@@ -19,13 +19,10 @@ export default new Router({
           path: '/',
           component: _ => import('@/components/article')
         },
-
-
-
-        // articles
+        // 文章
         {
-          name: '2017-9-22-15-31',
-          path: '/article/2017-9-22-15-31',
+          name: 'article',
+          path: '/article-*',
           component: _ => import('@/views/articles/2017-9-22-15-31.vue')
         }
       ]
