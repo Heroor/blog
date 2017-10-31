@@ -1,6 +1,6 @@
 @import 'src/assets/style/_common.scss';
 .home-article-list {
-  max-width: 1000px;
+  max-width: $article-max-width;
   padding: 0 10px;
   margin: 0 auto;
 }

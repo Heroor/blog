@@ -1,0 +1,9 @@
+@import '../../assets/style/_common.scss';
+.article-content {
+  max-width: $article-max-width;
+  padding: 0 100px;
+  margin: 0 auto;
+  .title {
+    font-size: 20px;
+  }
+}
