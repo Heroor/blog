@@ -4,7 +4,7 @@
     <banner :src="bannerImgSrc" :desc="articleInfo.desc" :title="articleInfo.title"></banner>
 
     <!-- 文章内容 -->
-    <router-view :list="articleListData" class="article-content"></router-view>
+    <router-view :list="articleListData"></router-view>
 
     <!-- 文章列表 -->
     <!-- <articleList :list="articleListData"></articleList> -->
@@ -13,10 +13,10 @@
 
 <script>
   // 假数据
-  import jsonData from '../../../static/data.json'
-console.log(jsonData)
-  import articleList from '../../components/article'
-  import banner from '../../components/banner'
+  import JsonData from '@static/data.json'
+  console.log(JsonData)
+  import articleList from '@components/article'
+  import banner from '@components/banner'
   export default {
     data() {
       return {
@@ -29,7 +29,7 @@ console.log(jsonData)
           desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi cumque deserunt tempore optio non? Recusandae eius esse laudantium ipsa eveniet animi numquam ut, est dolorum ratione? Aspernatur debitis quas modi?'
         },
         // 文章列表
-        articleListData: jsonData.body.articleList
+        articleListData: JsonData.body.articleList
       }
     },
     components: {
@@ -41,6 +41,5 @@ console.log(jsonData)
 </script>
 
 <style lang="scss">
-  @import './articles.scss';
 
 </style>

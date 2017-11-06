@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import navBar from '../components/nav'
+  import navBar from '@components/nav'
   export default {
     data() {
       return {
