@@ -6,8 +6,8 @@
             </li>
         </ul>
         <!-- 顶部左右功能键 -->
-        <a href="#" class="left"></a>
-        <a href="#" class="right"></a>
+        <!-- <a href="#" class="left"></a> -->
+        <!-- <a href="#" class="right"></a> -->
     </nav>
 </template>
 
