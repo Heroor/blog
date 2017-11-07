@@ -9,12 +9,12 @@
           </router-link>
         </h3>
         <div class="content">
-          <div class="right">
-            <img class="img transition-05" :src="item.image">
-          </div>
           <div class="left">
             <p class="desc w-b-bw">{{item.desc}}</p>
             <span class="date">{{item.date}}</span>
+          </div>
+          <div class="right">
+            <img class="img transition-05" :src="item.image">
           </div>
         </div>
       </li>
