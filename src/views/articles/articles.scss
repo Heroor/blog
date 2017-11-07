@@ -1,9 +1,11 @@
 @import '../../assets/style/_common.scss';
 .article-content {
-  max-width: $article-max-width;
-  padding: 0 100px;
+  max-width: $article-content-max-width;
+  padding: 40px;
   margin: 0 auto;
   word-break: break-word;
+  background-color: $white;
+  border-radius: 5px;
   .title {
     font-size: 26px;
     padding-bottom: 20px;
