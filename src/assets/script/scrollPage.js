@@ -1,3 +1,4 @@
+// 页面平滑滚动
 export default function() {
   function C() {
       if (!D && document.body) {
