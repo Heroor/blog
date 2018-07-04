@@ -1,17 +1,14 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view/>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'app'
+    name: 'App'
   }
 
 </script>
 
-<style lang="scss">
-  @import 'src/assets/style/_base.scss';
-
-</style>
+<style lang="stylus" src="./style/index.styl" />

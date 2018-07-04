@@ -1,37 +1,44 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import MainContainer from '@/views/MainContainer.vue'
+import Layout from '@/views/Layout.vue'
+
+const _import = path => () => import('@/views/' + path)
 
 Vue.use(Router)
 
 export default new Router({
   routes: [{
-    // 主视口 呈现导航
     path: '/',
-    component:  () => import('@/views'),
+    component: Layout,
     children: [{
-      // home页 呈现头图、文章列表、详情页
       path: '/',
-      component: () => import('@/views/articles'),
-      children: [
-        {
-          // 文章列表
-          name: 'list',
-          path: '/',
-          component: () => import('@/components/article')
-        },
-        // 文章
-        {
-          name: 'article',
-          path: '/article-*',
-          component: () => import('@/views/articles/article-details.vue')
-        }
-      ]
+      redirect: '/article',
+      alias: '/article',
+      component: MainContainer,
+      children: [{
+        path: '/article',
+        name: 'ArticleList',
+        component: _import('Article/ArticleList')
+      }, {
+        path: '/article/:id',
+        name: 'article-detail',
+        component: _import('Article/ArticleDetail')
+      }]
+    }, {
+      path: '/info',
+      component: MainContainer,
+      children: [{
+        path: '/',
+        name: 'infoPage',
+        component: _import('Info')
+      }]
     }]
-  },{
+  }, {
     path: '*',
-    name: '404',
+    nam: '404',
     component: {
-      template: '<p>404</p>'
+      template: '<div>404</div>'
     }
   }]
 })
