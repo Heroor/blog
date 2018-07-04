@@ -5,8 +5,12 @@
 </template>
 
 <script>
+  import scrollPage from '@/plugins/scrollPage.js'
   export default {
-    name: 'App'
+    name: 'App',
+    mounted () {
+      scrollPage()
+    }
   }
 
 </script>
