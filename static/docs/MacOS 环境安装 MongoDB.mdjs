@@ -1,9 +1,9 @@
 {{
-    title: '在 MacOS 上安装 MongoDB',
+    title: 'MacOS 环境安装 MongoDB',
     poster: '',
     date: '2018-07-06',
     id: '2',
-    desc: '在 MacOS 上安装 MongoDB'
+    desc: 'MacOS 环境安装 MongoDB'
 }}
 # MongoDB
 
@@ -34,7 +34,7 @@
 
 2. 手动安装
 
-    在 MongoDB [官网下载](https://www.mongodb.com/download-center#community) `mongodb-osx-ssl-x86_64-4.0.0.tgz` 文件（具体版本请以当前发行版本为主），并放入 `/usr/local` 目录中
+    在 MongoDB [官网下载](https://www.mongodb.com/download-center#community) `mongodb-osx-ssl-x86_64-4.0.0.tgz` 文件（具体版本请以当前发行版本为主），放入 `/usr/local` 目录中
 
     进入 `/usr/local` 目录：
 
