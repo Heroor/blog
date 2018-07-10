@@ -45,7 +45,7 @@ module.exports = {
       {
         test: /\.mdjs$/,
         use: [{
-          loader: path.resolve(__dirname + '/loaders/markdown-js-loader.js')
+          loader: path.resolve(__dirname + '/loaders/mdjs-loader.js')
         }]
       },
       {
