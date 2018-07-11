@@ -1,6 +1,7 @@
 <script>
 import data from "@/service/mock.js"
 export default {
+  name: 'ArticleDetail',
   data() {
     return {
       map: {
@@ -23,10 +24,10 @@ export default {
       (this.$refs.contentContainer.innerHTML = content || "")
     return (
       <div class="detail__wrap">
-        <h1 class="title t-a--c">{title}</h1>
+        <h1 class="title t--c w-b--b-w">{title}</h1>
         {/*<p class="desc">{desc}</p>*/}
         <div ref="contentContainer" class="content md" />
-        <div class="date">{date}</div>
+        <div class="date m-t--50">{date}</div>
       </div>
     )
   }
@@ -50,10 +51,8 @@ export default {
   padding 10px 0
   font-size $font-content + 2px
 .content
-  margin-top 20px
   font-size $font-content
 .date
-  margin-top 50px
   padding 20px 0
 .md >>> ul
   list-style disc

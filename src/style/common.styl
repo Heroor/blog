@@ -28,20 +28,28 @@
   transform translate(-50%, -50%)
 
 // 公用排版类
+.t--l
+  text-align left
+
+.t--c
+  text-align center
+
+.t-r
+  text-align right
+
 .f--l
   float left
 
 .f--r
   float right
 
-.t-a--c
-  text-align center
-
-.t-a--l
-  text-align left
-
-.t-a--r
-  text-align right
+// margin padding
+// eg: m-t--10
+for v in 0..6
+  for ty in (m margin) (p padding)
+    for po in (t top) (r right) (b bottom) (l left)
+      .{ty[0]}-{po[0]}--{v*10}
+        {ty[1]}-{po[1]} v*10px
 
 .m--0-auto
   margin 0 auto
@@ -53,17 +61,10 @@
   word-break break-word
 
 // 全局缓动类
-.transition--1000
-  transition all 1s ease
-
-.transition--500
-  transition all .5s ease
-
-.transition--300
-  transition all .3s ease
-
-.transition--100
-  transition all .1s ease
+// eg: .transition--300
+for d in 100 300 500 1000 2000
+  .transition--{d}
+    transition all (d / 1000)s
 
 
 // 下划线动画
@@ -81,7 +82,6 @@
     border-radius 50%
     background #fff
     opacity 0.618
-
   &:hover::after
     width 100%
     transition all .1s ease-out
