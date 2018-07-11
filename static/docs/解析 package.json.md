@@ -46,7 +46,9 @@
     }
     ```
 
-6. license：声明
+6. license：许可类型。
 
+    开源世界的软件并不都是可以自由使用的，不同的许可协议赋予了使用者不同的权利，`npm` 的许可类型多达300多种，通过 [OSI](https://opensource.org/about) 认证的只有80种，最广泛使用的开源许可是 `MIT` 协议，
+
+    > 参考自：[《GitHub漫游指南》](https://github.phodal.com/)
 7. main：指定程序的入口文件
-
