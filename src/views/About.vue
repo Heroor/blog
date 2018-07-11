@@ -4,14 +4,14 @@ export default {
   render() {
     return (
       <div class="info-container">
-        <h2 class="info__title">blog info</h2>
+        <h2 class="info__title m-b--40">About this blog</h2>
         <div class="info__container">
-          There is a blog of bener
+          There is the blog of bener.
         </div>
       </div>
     )
   }
-};
+}
 </script>
 <style scoped lang="stylus">
 .info-container
@@ -19,8 +19,6 @@ export default {
   padding 40px
   background #fff
   border-radius 6px
-.info__title
-  margin-bottom 40px
 .info__container
   font-size 14px
 </style>
