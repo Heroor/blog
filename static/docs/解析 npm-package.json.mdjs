@@ -1,0 +1,360 @@
+{{
+    title: '解析 npm-package.json',
+    poster: '',
+    date: '2018-07-16',
+    id: '3',
+    desc: '解析 npm-package.json'
+}}
+
+# 解析 npm-package.json
+
+## 前言
+
+`npm` 是 `nodejs` 的包管理工具，它让 `javascript` 开发者可以方便的分享、复用代码，并以强大的方式组装构建它们，这些可以重复引入的代码被称为 包（package）或模块（module），作为项目的依赖项独立存在。如今 `npm` 上已有 `700,000+` 个包，其中有很多优秀的、受开发者欢迎的包，例如 `lodash`、`webpack`、`react`、`express` 等，世界各地的 `javascript` 开发者都在使用 `npm` 或贡献代码，任何人都可以发布一个 `npm` 包。
+
+管理本地安装的 `npm` 包的最佳方法是创建一个 `package.json` 文件，一个 `package.json` 文件可以:
+
+1. 列出项目依赖的包。
+
+2. 指定项目所使用的依赖项的版本。
+
+3. 重新构建更加方便，更容易与他人共享开发。
+
+使用 `npm init -y` 可以快速创建一个 `package.json`：
+
+```json
+$ npm init -y
+
+// ./package.json
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ben/app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ben/app/issues"
+  },
+  "homepage": "https://github.com/ben/app#readme"
+}
+```
+
+可以为 `init` 命令设置多个配置选项：
+
+```bash
+> npm set init.author.email "ben@npmjs.com"
+> npm set init.author.name "ag_dubs"
+> npm set init.license "MIT"
+```
+
+> 注意：如果 `package.json` 中没有 `description` 字段，则 `package.json` 使用 `README.md` 或 `README` 的第一行。`description` 可帮助开发者在搜索 `npm` 时找到你的包，因此在 `package.json` 中编写描述非常有用。
+
+## 属性
+
+`package.json` 包含了很多属性，当发布一个 `npm` 包时，`name` 和 `version` 字段是必填的。
+
+1. name：当然就是这个 `npm` 包的名字。
+
+    `name` 的命名不能以点或下划线开始，不能有大写字母和空格，并且不能与 `node` 的核心模块相同（例如 `path`、`fs`）；考虑到 `name` 作为一个 `npm` 包的名字，它可能会出现在 `url` 引用中、命令行参数中，或是作为一个文件夹的名字，所以有很多限制，非安全的字符是不能出现的，同时也要尽量保持简短。
+
+    > 当你想要发布一个 `npm` 包时，最好先在[npm](https://www.npmjs.com/)搜索你的包名是否已经被占用了。
+
+2. version：版本号，使用了 [node-semver](https://github.com/npm/node-semver) 管理。
+
+    例如 `'1.0.4'`，`'12.4.5'`，版本号有三位数字，分别代表不同的含义：
+
+    - `'X.0.0'`：表示 `主版本`，有较大变动，但是向下不兼容的
+
+    - `'0.Y.0'`：表示 `次版本`，有新增功能，并且向下兼容
+
+    - `'0.0.Z'`：表示 `补丁版本`，一般是修复了上个版本的bug
+
+    > 当发布 `npm` 包的迭代时，版本号必需高于之前的版本。
+
+3. description：对这个包的表述。有利于使用者快速了解这个包的作用，因为它会出现在 `npm` 搜索结果里，而 `README.md` 不会。
+
+4. keywords：包的关键字。同样利于包出现在搜索结果里。
+
+5. homepage：项目的主页的链接，例如 `GitHub` 地址。
+
+6. bugs：跟踪或提出项目问题的途径，可以是 `GitHub` 的 `issues` 地址及你的邮箱:
+
+    ```json
+    "bugs": "https://github.com/ben/npm-program/issues"
+    ```
+
+    ```json
+    "bugs": {
+        "url" : "https://github.com/ben/npm-program/issues",
+        "email" : "ben@gmail.com"
+    }
+    ```
+
+7. license：许可类型。
+
+    开源世界的软件并不都是可以自由使用的，不同的许可协议赋予了使用者不同的权利，`npm` 的许可类型多达300多种，通过 [OSI](https://opensource.org/about) 认证的有80种，比较常见的开源许可有 `MIT`、`ISC`、`GPL`、`Apache`等。
+
+    > 参考自：[《GitHub漫游指南》](https://github.phodal.com/)
+
+8. author、contributors：作者或贡献者。
+
+    以一个 `people` 对象为单位，包含`name`、`url`、`email`字段；`author` 是一个 `people` 对象，`contributors` 是多个。
+
+    ```json
+    "author": {
+        "name": "ben",
+        "url": "http://www.ben.com",
+        "email": "ben@gmail.com"
+    }
+    ```
+
+    ```json
+    "contributors": [{
+        "name": "ben",
+        "url": "http://www.ben.com",
+        "email": "ben@gmail.com"
+    }]
+    ```
+
+    ```json
+    // 同样可以简写为字符串的形式，npm会自动解析
+    "author": "ben <ben@gmail.com> (http://www.ben.com)"
+    ```
+
+9. files：描述了 `npm` 包当做依赖安装时要包含的目录，默认会包含全部文件。
+
+    // vue package.json 中的 files
+    ```json
+    "files": [
+        "src",
+        "dist/*.js",
+        "types/*.d.ts"
+    ]
+    ```
+
+    也可以声明一个 `.npmignore` 文件来确定包含的文件。
+
+10. main：指定程序的入口文件。
+
+    在 `require('myapp')` 这个模块时，`main` 字段的文件将被返回。
+
+    使用 `npm init` 或 `yarn init` 初始化时会默认为项目根目录下的 `index.js`。
+
+11. bin：用来指定可执行文件的路径。
+
+    如果你的项目有可执行文件，就需要在 `bin` 字段中指定文件路径作为映射，当项目作为依赖安装时，`npm` 会在全局或 `./node_modules/.bin/` 安装这些可执行文件。
+
+    ```json
+    "bin": {
+        "myapp": "./cli.js"
+    }
+    ```
+
+    > 可执行脚本需要以 `#!/usr/bin/env node` 开头。
+
+12. repository：标识项目代码所在的位置，可以帮助开发者找到项目或为项目贡献代码。
+
+    ```json
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/npm/cli.git"
+    }
+    ```
+
+    `npm` 可识别的快捷语法：
+
+    ```js
+    "repository": "npm/npm"
+    "repository": "github:user/repo"
+    "repository": "gist:11081aaa281"
+    "repository": "bitbucket:user/repo"
+    "repository": "gitlab:user/repo"
+    ```
+
+13. scripts：一个包含特定脚本命令的对象。
+
+    `key` 是命令的事件名，`value` 是执行时所运行的命令。
+
+    ```json
+    "scripts": {
+        "dev": "node app.js"
+    }
+    ```
+
+    如果根目录中有 `server.js` 文件，那 scripts 的默认值如下：
+
+    ```json
+    "scripts": {
+        "start": "node server.js"
+    }
+    ```
+
+14. dependencies：项目依赖的文件组成的对象，键值对将包名映射到了版本范围，一般描述为生产环境的依赖关系。
+
+    `-S` 或 `--save` 添加的依赖会被加到这里来：
+
+    ```js
+    $ npm i vue --save
+
+    "dependencies": {
+        "vue": "^2.5.2"
+    }
+    ```
+
+    ```text
+    version  版本必须完全匹配
+    >version  必须大于此版本
+    >=version  大于等于此版本
+    <version  小于此版本
+    <=version  小于等于系版本
+    ~version  约等于此版本
+    ^version  兼容版本
+    1.2.X  可以是 1.2.0, 1.2.1, ..., 而不是1.3.0
+    http://...  以 URL 作为依赖
+    *  匹配任何版本
+    ""  空字符串和 * 是一样的
+    version1 - version2  相当于 >=version1 <=version2
+    range1 || range2  当range1可用时用range1，否则用range2
+    git...  使用 Git URLs 作为依赖
+    user/repo  同上
+    tag  使用一个公开的 tag 版本
+    path/path/path  使用本地路径
+    ```
+
+    ```json
+    "dependencies": {
+        "foo": "1.0.0 - 2.9999.9999",
+        "bar": ">=1.0.2 <2.1.2",
+        "baz": ">1.0.2 <=2.3.4",
+        "boo": "2.0.1",
+        "qux": "<1.0.0 || >=2.3.1 <2.4.5 || >=2.5.2 <3.0.0",
+        "asd": "http://asdf.com/asdf.tar.gz",
+        "til": "~1.2",
+        "elf": "~1.2.3",
+        "two": "2.x",
+        "thr": "3.3.x",
+        "lat": "latest",
+        "dyl": "file:../dyl"
+    }
+
+15. devDependencies：如果有人在项目中想使用你的模块，那么一定不希望也不需要下载你模块中的开发或测试环境依赖，这种情况下，最好把这些附加依赖映射到 `devDependencies` 字段中。
+
+    `-D` 或 `--save-dev` 添加的依赖会被加到这里来：
+
+    ```json
+    $ npm i stylus --save-dev
+
+    "devDependencies": {
+        "stylus": "^0.54.5"
+    }
+    ```
+
+16. peerDependencies、bundledDependencies、optionalDependencies
+
+17. engines：指定项目的 `nodejs` 版本（例如 webpack 4.0.0+ 只支持 nodejs 6.11.5 以上）；如果省略了 `engines` 字段或指定为 `"*"`，则表示可以支持任何版本。
+
+    > 注意：除非用户设置了 `engine-strict` 标识， 否则此字段仅供参考，并且将项目作为依赖项时才起作用。`engineStrict` 字段已经在npm 3.0.0 是移除了，如果想使用可以用 [engine-strict](https://www.npmjs.com/package/engine-strict) 这个模块
+
+    当然除了指定 `nodejs` 版本，还可以指定 `npm` 版本：
+
+    ```json
+    "engines": {
+        "node": ">=6.11.5",
+        "npm": "~5.0.0"
+    }
+    ```
+
+18. os：为模块指定操作系统。
+
+    ```json
+    "os": ["darwin", "linux"]
+
+    // 如果你想设置黑名单，只需要在操作系统前加 '!'
+    "os": ["!win32"]
+    ```
+
+    > 主机操作系统由 `process.arch` 确定
+
+19. cpu：如果你的代码仅可以在某些cpu体系上运行，那么这个字段可以帮到你。
+
+    ```json
+    "cpu" : [ "x64", "ia32" ]
+
+    // 同样支持黑名单：
+    "cpu" : [ "!arm", "!mips" ]
+    ```
+
+    > 主机架构由 `process.arch` 确定
+
+20. private：如果你设置了 `private` 为 `true`，那么 `npm` 将拒绝发布它。这是一种防止私有库被意外发布的方法。
+
+当运行 `npm install` 时，`npm` 会根据 `package.json` 的 `dependencies` 与 `devDependencies` 字段映射的所有依赖版本，将依赖包安装到 `./node_modules/` 中。
+
+
+## 定制 `package.json`
+
+如果你希望敲下 `npm init` 就能生成你想要的 `package.json`，那么你可以定制你的 `package.json`：
+
+创建 `~/.npm-init.js` 文件:
+
+```js
+module.exports = {
+  customField: 'Custom Field',
+  otherCustomField: 'This field is really cool'
+}
+```
+
+```js
+$ npm init
+
+// ./package.json
+{
+  customField: 'Custom Field',
+  otherCustomField: 'This field is really cool'
+}
+```
+
+使用 `prompt` 加入自定义问题：
+
+```js
+ module.exports = prompt("what's your favorite flavor of ice cream, buddy?", "I LIKE THEM ALL");
+ ```
+
+ ## 发布一个 npm 包
+
+> 在此之前，你需要注册一个 `npm` 账号。
+
+- 配置好 `package.json` 文件，为你的包起一个好名字
+
+- 检查项目的开源许可类型，减少一些纠纷
+
+- 最好有一些单元测试，让开发者放心食用
+
+- 编写一个清晰的 `README.md`，项目的使用文档，花里胡哨的配图
+
+```bash
+# 登录 npm 账号
+$ npm login
+
+# 输入用户名 密码
+Username: ben
+Password:
+Email: (this IS public) ben@npmjs.com
+
+# 登录成功
+Logged in as ben on https://registry.npmjs.org/.
+
+# 发布
+$ npm publish
+```
+
+![http://shields.io/](https://img.shields.io/badge/package-json-ff69b4.svg)

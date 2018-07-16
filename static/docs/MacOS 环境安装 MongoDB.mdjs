@@ -1,0 +1,98 @@
+{{
+    title: 'MacOS 环境安装 MongoDB',
+    poster: '',
+    date: '2018-07-06',
+    id: '2',
+    desc: 'MacOS 环境安装 MongoDB'
+}}
+# MongoDB
+
+## Install in Mac
+
+1. 使用 [brew](https://brew.sh/) 安装
+
+    > brew 是 MacOS 上的一个包管理器
+
+    安装 mongodb：
+
+    ```bash
+    # sudo 命令可以获得系统权限，输入账户密码即可执行
+    sudo brew install mongodb
+    ```
+
+    查看 brew 是否已安装：
+
+    ```bash
+    brew list
+    ```
+
+    若之前已安装过 MongoDB，可以使用命令来升级：
+
+    ```bash
+    brew upgrade mongodb
+    ```
+
+2. 手动安装
+
+    在 MongoDB [官网下载](https://www.mongodb.com/download-center#community) `mongodb-osx-ssl-x86_64-4.0.0.tgz` 文件（具体版本请以当前发行版本为主），放入 `/usr/local` 目录中
+
+    进入 `/usr/local` 目录：
+
+    ```bash
+    cd /usr/local
+    ```
+
+
+    解压文件：
+
+    ```bash
+    sudo tar -zxvf mongodb-osx-ssl-x86_64-4.0.0.tgz
+    ```
+
+    重命名文件夹
+
+    ```bash
+    sudo mv mongodb-osx-ssl-x86_64-4.0.0 mongodb
+    ```
+
+
+## Run MongoDB
+
+为 MongoDB 添加配置
+
+运行前，首先需要一个 `数据库储存` 目录。当启动 MongoDB 时，默认数据库目录为 `/data/db`，所以我们直接在根目录下创建即可：
+
+```bash
+cd /
+
+# 使用 sudo 命令创建
+sudo mkdir -p /data/db
+```
+
+> 也可以在启动 mongod 的时候，通过 `--dbpath` 指定 `data/db` 目录： `mongod --dbpath ./my-data`
+
+---
+
+接下来就可以启动 MongoDB 了：
+
+在没有设置全局路径时，需要进入 `mongodb/bin` 目录下启动：
+```bash
+# 进入 mongodb 目录
+cd /usr/local/mongodb/bin
+
+# 启动 mongod
+./mongod
+```
+
+```bash
+# 新打开一个终端窗口并进入 /usr/local/mongodb/bin，启动 mongo
+cd /usr/local/mongodb/bin
+
+./mongo
+```
+
+关闭服务：
+```bash
+> db.shutdownServer()
+> exit
+```
