@@ -33,13 +33,23 @@
     overflow hidden
     &.simple
       height 20px
+  .banner-container
+    overflow hidden
+    height $banner-height
+    width 280%
+    border-radius 50% 50% 0 0
+    background $page-bg
+  .banner
+    max-width 100vw
+    min-width 760px
+
+  @media screen and (max-width 640px)
+    .banner-wrap
+      height $banner-height - 200
     .banner-container
-      overflow hidden
-      height $banner-height
-      width 280%
-      border-radius 50% 50% 0 0
-      background $page-bg
-      .banner
-        max-width 100vw
-        min-width 760px
+      height $banner-height - 200
+    .banner
+      min-width 560px
+
+
 </style>
