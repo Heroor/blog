@@ -1,0 +1,89 @@
+// 清楚浮动
+.clearfix
+  &:after
+    content ''
+    display block
+    height 0
+    line-height 0
+    clear both
+    visibility hidden
+
+// 水平定位居中
+.position--align-c
+  position absolute
+  left 50%
+  transform translateX(-50%)
+
+// 垂直定位居中
+.position--vertical-m
+  position absolute
+  top 50%
+  transform translateY(-50%)
+
+// 水平垂直定位居中
+.position--center
+  position absolute
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+
+// 公用排版类
+.f--l
+  float left
+
+.f--r
+  float right
+
+.t-a--c
+  text-align center
+
+.t-a--l
+  text-align left
+
+.t-a--r
+  text-align right
+
+.m--0-auto
+  margin 0 auto
+
+.w-b--b-a
+  word-break break-all
+
+.w-b--b-w
+  word-break break-word
+
+// 全局缓动类
+.transition--1000
+  transition all 1s ease
+
+.transition--500
+  transition all .5s ease
+
+.transition--300
+  transition all .3s ease
+
+.transition--100
+  transition all .1s ease
+
+
+// 下划线动画
+.underline
+  position relative
+  &::after
+    content ''
+    position absolute
+    left 50%
+    bottom 0
+    width 0
+    height 2px
+    transform translateX(-50%)
+    transition all .3s ease-out
+    border-radius 50%
+    background #fff
+    opacity 0.618
+
+  &:hover::after
+    width 100%
+    transition all .1s ease-out
+    border-radius 1px
+    opacity 1
