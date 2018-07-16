@@ -451,10 +451,10 @@ fieldset {
   margin-bottom: 0
 }
 
-.md ul p,
+/*.md ul p,
 .md ol p {
   margin: 0
-}
+}*/
 
 .md p:last-child {
   margin-bottom: 0
@@ -479,7 +479,6 @@ fieldset {
 
 .md img {
   padding: 3px;
-  border: 1px solid #ddd
 }
 
 .md img.emoji {

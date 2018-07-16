@@ -6,11 +6,11 @@ export default {
   functional: true,
   render() {
     return (
-      <div class="header-wrap" style={{marginBottom: '40px'}}>
+      <div class="header-wrap m-b--20">
         <Nav />
         <Banner />
       </div>
     )
   }
-};
+}
 </script>

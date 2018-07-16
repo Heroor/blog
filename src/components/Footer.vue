@@ -3,7 +3,7 @@ export default {
   functional: true,
   render() {
     return (
-      <div class="footer-wrap">
+      <div class="m-t--20">
         <p class="footer__hosted">
           <span>Hosted by </span>
           <b><a class="footer__strong" href="https://pages.coding.me">Coding Pages</a></b>
@@ -13,17 +13,13 @@ export default {
           </a>
         </p>
       </div>
-    );
+    )
   }
-};
+}
 </script>
 
 <style scoped lang="stylus">
 @import '../style/mix.styl';
-
-.footer-wrap {
-  margin-top: 20px;
-}
 
 .footer__hosted {
   line-height: 3;
