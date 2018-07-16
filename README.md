@@ -21,7 +21,8 @@ npm run build --report
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## TODO:
-- [ ] change all template to jsx
+- [x] change all template to jsx
+- [ ] img-blur-loading
 - [ ] refactor common css to stylus
 - [ ] refactor mdjs-loader
 - [ ] introduction of vuex
