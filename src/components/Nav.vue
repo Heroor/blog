@@ -1,27 +1,21 @@
-<template>
-  <div class="nav-wrap">
-    <ul class="nav-ul">
-      <li class="nav-item" v-for="(v, i) in navList" :key="i">
-        <router-link :to="v.link" class="underline">
-          {{v.name}}
-        </router-link>
-      </li>
-    </ul>
-  </div>
-</template>
-
 <script>
+  import routes from '@/router/config.js'
   export default {
-    data() {
-      return {
-        navList: [{
-          name: 'Home',
-          link: '/article'
-        }, {
-          name: 'Info',
-          link: '/info'
-        }]
-      }
+    functiional: true,
+    render (e) {
+      return (
+        <div class="nav-wrap">
+          <ul class="nav-ul">
+            {routes.map((route, i) => (
+              <li class="nav-item" key={i}>
+                <router-link to={route.redirect || route.path} class="underline">
+                  {route.title}
+                </router-link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
     }
   }
 
