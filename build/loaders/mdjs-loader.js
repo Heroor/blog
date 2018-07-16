@@ -15,7 +15,6 @@ module.exports = function (markdown) {
     infoMatch = reg.exec(markdown)
 
     markdown = markdown.replace(reg, '')
-    console.log(infoMatch)
     info = (infoMatch && infoMatch[1]) || "{}"
 
     // marked.setOptions(options);

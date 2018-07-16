@@ -1,21 +1,21 @@
-<template>
-  <div class="home-wrap">
-    <Header />
-    <router-view />
-    <Footer />
-  </div>
-</template>
-
 <script>
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export default {
-  components: {Header, Footer}
+  render () {
+    return (
+      <div class="layout">
+        <Header />
+        <router-view />
+        <Footer />
+      </div>
+    )
+  }
 }
 </script>
 
 <style scoped lang="stylus">
- .home-wrap
+ .layout
     font-size 14px
 </style>

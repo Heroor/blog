@@ -1,21 +1,14 @@
 <script>
-  import data from '@/service/mock.js'
-  console.log(data)
+  import mdjsData from '@/service/mock.js'
+  console.log(mdjsData)
   export default {
-    data() {
-      return {
-        articleList: []
-      }
-    },
-    mounted() {
-      this.articleList = data.mapList
-    },
+    functional: true,
     render() {
       return (
         <div class="article-wrap">
           <ul class="article__ul">
             {
-              this.articleList.map((v, i) =>
+              mdjsData.mapList.map((v, i) =>
                 <li key={i} class="article-item">
                   <h2 class="w-b--b-a article__title-wrap">
                     <router-link to={'article/' + v.id} class="article__title">{v.title}</router-link>
@@ -123,4 +116,3 @@
       max-height 0
       transform rotate(360deg)
 </style>
-
