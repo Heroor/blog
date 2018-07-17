@@ -5,7 +5,7 @@ export default {
     const mdjs = require('../../static/docs/' + path.slice(2))
     return {
       ...mdjs.info,
-      content: mdjs.content
+      content: mdjs.content.trim()
     }
   })
 }

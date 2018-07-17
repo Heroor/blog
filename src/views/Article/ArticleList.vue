@@ -1,6 +1,6 @@
 <script>
   import mdjsData from '@/service/mock.js'
-  console.log(mdjsData)
+  // console.log(mdjsData)
   export default {
     functional: true,
     render() {

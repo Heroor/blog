@@ -1,31 +1,25 @@
 import MainContainer from '@/views/MainContainer.vue'
 
-const _import = path => () => import ('@/views/' + path)
+export const _import = path => () =>
+  import ('@/views/' + path)
 
 const routes = [{
-  title: 'Home',
   path: '/',
-  redirect: '/article',
-  alias: '/article',
-  component: MainContainer,
-  children: [{
-    name: 'article-list',
-    path: '/article',
-    component: _import('Article/ArticleList')
-  }, {
-    name: 'article-detail',
-    path: '/article/:id',
-    component: _import('Article/ArticleDetail')
-  }]
+  redirect: '/article'
 }, {
-  title: 'About',
+  isNav: true,
+  name: 'Home',
+  path: '/article',
+  component: _import('Article/ArticleList')
+}, {
+  name: 'ArticleDetail',
+  path: '/article/:id',
+  component: _import('Article/ArticleDetail')
+}, {
+  isNav: true,
+  name: 'About',
   path: '/about',
-  component: MainContainer,
-  children: [{
-    path: '/',
-    name: 'about',
-    component: _import('About')
-  }]
+  component: _import('About')
 }]
 
 export default routes

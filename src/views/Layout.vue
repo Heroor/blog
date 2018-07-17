@@ -1,13 +1,14 @@
 <script>
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Container from '@/views/MainContainer'
 
 export default {
   render () {
     return (
       <div class="layout">
         <Header />
-        <router-view />
+        <Container />
         <Footer />
       </div>
     )
