@@ -25,6 +25,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 - [ ] img-blur-loading
 - [ ] refactor common css to stylus
 - [ ] refactor mdjs-loader
+- [ ] introduction of vConsole
 - [ ] introduction of vuex
 - [ ] introduction of ts
 - [ ] add theme feat
