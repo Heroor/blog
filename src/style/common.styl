@@ -9,19 +9,19 @@
     visibility hidden
 
 // 水平定位居中
-.position--align-c
+.posi--align
   position absolute
   left 50%
   transform translateX(-50%)
 
 // 垂直定位居中
-.position--vertical-m
+.posi--vert
   position absolute
   top 50%
   transform translateY(-50%)
 
 // 水平垂直定位居中
-.position--center
+.posi--center
   position absolute
   top 50%
   left 50%
@@ -43,13 +43,14 @@
 .f--r
   float right
 
-// margin padding
-// eg: m-t--10
-for v in 0..6
-  for ty in (m margin) (p padding)
-    for po in (t top) (r right) (b bottom) (l left)
-      .{ty[0]}-{po[0]}--{v*10}
-        {ty[1]}-{po[1]} v*10px
+.t-a--c
+  text-align center
+
+.t-a--l
+  text-align left
+
+.t-a--r
+  text-align right
 
 .m--0-auto
   margin 0 auto
@@ -59,6 +60,23 @@ for v in 0..6
 
 .w-b--b-w
   word-break break-word
+
+
+// margin padding
+// eg: m-t--10
+for v in 0..6
+  for ty in (m margin) (p padding)
+    for po in (t top) (r right) (b bottom) (l left)
+      .{ty[0]}-{po[0]}--{v*10}
+        {ty[1]}-{po[1]} v*10px
+
+// margin padding
+// eg: m-t--100
+for v in 1..5
+  for ty in (m margin) (p padding)
+    for po in (t top) (r right) (b bottom) (l left)
+      .{ty[0]}-{po[0]}--{v*100}
+        {ty[1]}-{po[1]} v*100px
 
 // 全局缓动类
 // eg: .transition--300

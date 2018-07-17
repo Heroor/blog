@@ -8,8 +8,8 @@
     render () {
       return (
         <div class={`banner-wrap ${!bannerUrl && 'simple'}`}>
-          <div class="banner-container position--align-c">
-            <img src={bannerUrl} ondragstart={() => false} class="banner transition-05 position--align-c" />
+          <div class="banner-container posi--align">
+            <img src={bannerUrl} ondragstart={() => false} class="banner transition-05 posi--align" />
           </div>
         </div>
       )
