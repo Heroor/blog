@@ -19,7 +19,7 @@
 
 RequireJS 是为 js 实现 AMD 模块规范第三方库
 
-AMD 采用异步的方式加载模块，将所有依赖前置，依赖这些模块的代码都放在一个回调函数中，等所有模块加载完成后才会执行这个回调函数
+AMD 采用异步的方式加载模块，将所有依赖前置，依赖这些模块的代码都放在一个回调函数中，等所有模块加载完成后才会执行这个回调函数，很适合在浏览器端处理异步获取的模块
 
 ### 加载 RequireJS：
 
@@ -94,6 +94,7 @@ define(function(require, exports, module) {
   if (flag) {
     // 只有条件成立才会引入
     const h = require('hello')
+    // ...
   }
 
   // 在 exports 上暴露一个方法
@@ -103,42 +104,49 @@ define(function(require, exports, module) {
 })
 ```
 
+```js
+/*  main.js */
+
+define(function(require, exports, module) {
+  const utils = require('utils')
+  console.log(utils.add(1, 2))  // 3
+})
+```
 
 ## UMD（Universal Module Definition）
 
 由于 AMD 与 CommonJS 规范的差异，导致模块引用方式出现浏览器端与 node 端的分化，UMD 正是对 AMD 与 CommonJS 两种规范的兼容，它会判断当前环境是否支持某一规范，然后运用此规范去加载模块，如果不支持任何模式，将会挂在到全局
 
 ```js
-// Uses CommonJS, AMD or browser globals to create a jQuery plugin.
-
 (function (factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['jquery'], factory)
-    } else if (typeof module === 'object' && module.exports) {
-        // Node/CommonJS
-        module.exports = function( root, jQuery ) {
-            if ( jQuery === undefined ) {
-                // require('jQuery') returns a factory that requires window to
-                // build a jQuery instance, we normalize how we use modules
-                // that require this pattern but the window provided is a noop
-                // if it's defined (how jquery works)
-                if ( typeof window !== 'undefined' ) {
-                    jQuery = require('jquery')
-                }
-                else {
-                    jQuery = require('jquery')(root)
-                }
-            }
-            factory(jQuery)
-            return jQuery
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['jquery'], factory)
+  } else if (typeof module === 'object' && module.exports) {
+    // Node/CommonJS
+    module.exports = function (root, jQuery) {
+      if (jQuery === undefined) {
+        // require('jQuery') returns a factory that requires window to
+        // build a jQuery instance, we normalize how we use modules
+        // that require this pattern but the window provided is a noop
+        // if it's defined (how jquery works)
+        if (typeof window !== 'undefined') {
+          jQuery = require('jquery')
+        } else {
+          jQuery = require('jquery')(root)
         }
-    } else {
-        // Browser globals
-        factory(jQuery)
+      }
+      factory(jQuery)
+      return jQuery
     }
+  } else {
+    // Browser globals
+    factory(jQuery)
+  }
 }(function ($) {
-    $.fn.jqueryPlugin = function () { return true }
+  $.fn.jqueryPlugin = function () {
+    return true
+  }
 }))
 ```
 
