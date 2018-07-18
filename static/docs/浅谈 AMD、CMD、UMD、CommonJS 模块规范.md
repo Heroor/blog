@@ -1,0 +1,237 @@
+{{
+  title: '浅谈 AMD、CMD、UMD、CommonJS 模块规范',
+  poster: '',
+  date: '2018-07-17',
+  id: '4',
+  desc: '浅谈 AMD、CMD、UMD、CommonJS 模块规范'
+}}
+
+# AMD、CMD、UMD、CommonJS、ES6 模块规范
+
+在传统的 html 网页中，js 代码都是通过 script 标签加载到页面上来的，不同功能的代码混合在一起时，很多问题就会暴露出来：
+
+1. 全局变量造成命名空间污染
+2. 代码不易复用，无法拆分
+3. js 引入顺序问题
+4. 维护困难
+
+## AMD（Asynchronous Module Definition）
+
+RequireJS 是为 js 实现 AMD 模块规范第三方库
+
+AMD 采用异步的方式加载模块，将所有依赖前置，依赖这些模块的代码都放在一个回调函数中，等所有模块加载完成后才会执行这个回调函数
+
+### 加载 RequireJS：
+
+```html
+/* index.html */
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>AMD</title>
+</head>
+
+<body>
+  name: <span class="name"></span>
+
+  <!-- 引入 require.js 与 main.js -->
+  <script src="require.js" data-main="main"></script>
+</body>
+
+</html>
+```
+
+### 定义模块：
+
+```js
+/* 模块 module.js */
+
+// 依赖数组 与 回调函数
+define(['lodash', 'jquery'], function (_, $) {
+
+  // 局部变量
+  var names = ['tom', 'jerry', 'oliver']
+  $('.name').html(_.last(names))
+
+  // 导出
+  return {
+    names: names
+  }
+})
+```
+
+define 函数的第一个参数是一个数组，所有的依赖项都放在其中；第二个参数是回调函数，回调函数的参数就是依赖模块导出的值。
+
+### 引入模块
+
+```js
+/* 主入口 main.js */
+
+require(['module.js'], function (m) {
+  console.log(m.names)  // ['tom', 'jerry', 'oliver']
+})
+```
+
+要引入其他模块时，同样将依赖数组传给 require 函数；第二个参数是回调函数，回调函数的参数就是依赖模块导出的值。
+
+
+## CMD（Common Module Definition）
+
+[SeaJS](https://www.zhangxinxu.com/sp/seajs/#intro) 是 [CMD](https://github.com/seajs/seajs/issues/242) 规范的代表框架，它以懒加载的方式去加载模块，推崇依赖就近
+
+### 引入与导出模块
+
+```js
+/*  utils.js */
+
+define(function(require, exports, module) {
+  // ...
+
+  // 使用 require 引入模块
+  if (flag) {
+    // 只有条件成立才会引入
+    const h = require('hello')
+  }
+
+  // 在 exports 上暴露一个方法
+  exports.add = function (a, b) {
+    return a + b
+  }
+})
+```
+
+
+## UMD（Universal Module Definition）
+
+由于 AMD 与 CommonJS 规范的差异，导致模块引用方式出现浏览器端与 node 端的分化，UMD 正是对 AMD 与 CommonJS 两种规范的兼容，它会判断当前环境是否支持某一规范，然后运用此规范去加载模块，如果不支持任何模式，将会挂在到全局
+
+```js
+// Uses CommonJS, AMD or browser globals to create a jQuery plugin.
+
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory)
+    } else if (typeof module === 'object' && module.exports) {
+        // Node/CommonJS
+        module.exports = function( root, jQuery ) {
+            if ( jQuery === undefined ) {
+                // require('jQuery') returns a factory that requires window to
+                // build a jQuery instance, we normalize how we use modules
+                // that require this pattern but the window provided is a noop
+                // if it's defined (how jquery works)
+                if ( typeof window !== 'undefined' ) {
+                    jQuery = require('jquery')
+                }
+                else {
+                    jQuery = require('jquery')(root)
+                }
+            }
+            factory(jQuery)
+            return jQuery
+        }
+    } else {
+        // Browser globals
+        factory(jQuery)
+    }
+}(function ($) {
+    $.fn.jqueryPlugin = function () { return true }
+}))
+```
+
+
+
+## CommonJS
+
+CommonJS 是 NodeJS 采用的模块规范
+
+每一个文件被视为一个模块，每一个模块拥有独立的作用域，模块的内部变量、函数、类无法被其他模块访问。
+
+### 导出模块
+
+在模块内部 module.exports 上指定额外的属性，会被添加到模块的根部，可作为导出的内容：
+
+```js
+const a = 1
+const b = 2 // b 未导出，只作为局部变量
+
+// a 被导出
+module.exports.a = a
+```
+
+```js
+const a = 1
+const b = 2 // b 未导出，只作为局部变量
+
+// a 被导出
+module.exports = {
+  a: a
+}
+```
+
+模块内部的 exports 变量指向了 module.exports，可以方便的作为模块的出口：
+
+```js
+exports.a = 1
+```
+
+```js
+exports = {
+  a: 1
+}
+```
+
+**区分 exports 与 module.exports：**
+
+因为 exports 只是单纯作为 module.exports 的引用，所以当 module.exports 被赋值后，exports 原来指向的内容将无法导出：
+
+```js
+exports.a = 1
+
+module.exports = {
+  b: 2
+}
+
+// 只有 b 被导出
+```
+
+### 引入模块
+
+CommonJS 加载模块的方式是同步的，通过 require 引入外部模块：
+
+```js
+const myModule = require('myModule')
+
+myModule.foo({
+  data: require('./data')
+})
+```
+
+如果模块名与核心模块一致时，NodeJS 会优先加载核心模块，如：http, fs：
+
+```js
+const fs = require('fs')
+
+fs.unlink('/tmp/hello', (err) => {
+  if (err) throw err
+  console.log('成功删除 /tmp/hello')
+})
+```
+
+由于模块加载是同步的，所以异步导出的模块是获取不到的：
+
+```js
+setTimeOut(function () {
+  exports.a = 1
+}, 1000)
+
+// 在其他模块引入时是 {}
+```
+
+require 是每个模块的内置对象
+
+- require.main 是当前文件的 module
+- require.main.filename 是 NodeJS 程序的入口（文件路径）
