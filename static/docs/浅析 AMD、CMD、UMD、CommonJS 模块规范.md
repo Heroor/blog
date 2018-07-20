@@ -1,9 +1,9 @@
 {{
-  title: '浅谈 AMD、CMD、UMD、CommonJS 模块规范',
+  title: '浅析 AMD、CMD、UMD、CommonJS 模块规范',
   poster: '',
   date: '2018-07-17',
   id: '4',
-  desc: '浅谈 AMD、CMD、UMD、CommonJS 模块规范'
+  desc: '浅析 AMD、CMD、UMD、CommonJS 模块规范'
 }}
 
 # AMD、CMD、UMD、CommonJS、ES6 模块规范
