@@ -6,7 +6,7 @@ export default {
       <div class="info-container" key="about">
         <h2 class="info__title m-b--40">About this blog</h2>
         <div class="info__container">
-          There is the blog of bener.
+          bener写字的地方。
         </div>
       </div>
     )

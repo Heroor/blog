@@ -1,12 +1,10 @@
 {{
-  title: '浅析 AMD、CMD、UMD、CommonJS 模块规范',
+  title: '浅析 AMD CMD UMD CommonJS 模块规范',
   poster: '',
   date: '2018-07-17',
   id: '4',
-  desc: '浅析 AMD、CMD、UMD、CommonJS 模块规范'
+  desc: '浅析 AMD CMD UMD CommonJS 模块规范'
 }}
-
-# AMD、CMD、UMD、CommonJS、ES6 模块规范
 
 在传统的 html 网页中，js 代码都是通过 script 标签加载到页面上来的，不同功能的代码混合在一起时，很多问题就会暴露出来：
 
