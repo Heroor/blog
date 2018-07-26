@@ -1,33 +1,31 @@
 <script>
-  import mdjsData from '@/service/mock.js'
-  // console.log(mdjsData)
+  import { articleList }  from '@/service/mock.js'
   export default {
     functional: true,
     render() {
       return (
         <div class="article-wrap">
           <ul class="article__ul">
-            {
-              mdjsData.mapList.map((v, i) =>
-                <li key={i} class="article-item">
-                  <h2 class="w-b--b-a article__title-wrap">
-                    <router-link to={'article/' + v.id} class="article__title">{v.title}</router-link>
-                  </h2>
-                  <div class="article__content">
-                    <div class="article__left">
-                      <p class="article__desc w-b--b-w w-b--b-a">{v.desc}</p>
-                      <span class="article__date">{v.date}</span>
-                    </div>
-                    {
-                      v.poster &&
-                      <div class="article__right">
-                        <img class="article__img" src={v.poster} alt=""/>
-                      </div>
-                    }
+            {articleList.map((v, i) => (
+              <li key={i} class="article-item">
+                <h2 class="w-b--b-a article__title-wrap">
+                  <router-link to={"article/" + v.id} class="article__title">
+                    {v.title}
+                  </router-link>
+                </h2>
+                <div class="article__content">
+                  <div class="article__left">
+                    <p class="article__desc w-b--b-w w-b--b-a">{v.desc}</p>
+                    <span class="article__date">{v.date}</span>
                   </div>
-                </li>
-              )
-            }
+                  {v.poster && (
+                    <div class="article__right">
+                      <img class="article__img" src={v.poster} alt="" />
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       )

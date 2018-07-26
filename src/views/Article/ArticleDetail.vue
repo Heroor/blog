@@ -1,5 +1,5 @@
 <script>
-import data from "@/service/mock.js"
+import {articleList} from "@/service/mock.js"
 export default {
   name: 'ArticleDetail',
   data() {
@@ -16,7 +16,7 @@ export default {
   },
   mounted() {
     const { id } = this.$route.params
-    this.map = data.mapList.find(v => v.id === id)
+    articleList.some(v => v.id === id && (this.map = v))
   },
   render() {
     const { title, desc, poster, content, date } = this.map
