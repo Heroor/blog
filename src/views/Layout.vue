@@ -1,6 +1,7 @@
 <script>
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import GoTop from '@/components/GoTop'
 import Container from '@/views/MainContainer'
 
 export default {
@@ -10,6 +11,7 @@ export default {
         <Header />
         <Container />
         <Footer />
+        <GoTop />
       </div>
     )
   }
