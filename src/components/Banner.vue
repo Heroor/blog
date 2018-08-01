@@ -1,24 +1,18 @@
-<template>
-  <div :class="{
-      'banner-wrap': true,
-      'simple': !bannerSrc
-    }">
-    <div class="banner-container position--align-c">
-      <img :src="bannerSrc" ondragstart="return false" class="banner transition-05 position--align-c">
-    </div>
-  </div>
-</template>
-
 <script>
-  import img from '@/assets/images/banner.jpg'
+  const bannerUrl = 'http://oueon55l6.bkt.clouddn.com/banner.jpg'
+  const title = 'title'
+  const desc = 'desc'
 
   export default {
-    data() {
-      return {
-        bannerSrc: img,
-        title: 'title',
-        desc: 'desc'
-      }
+    functional: true,
+    render () {
+      return (
+        <div class={`banner-wrap ${!bannerUrl && 'simple'}`}>
+          <div class="banner-container posi--align">
+            <img src={bannerUrl} ondragstart={() => false} class="banner transition-05 posi--align" />
+          </div>
+        </div>
+      )
     }
   }
 

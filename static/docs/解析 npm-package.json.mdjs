@@ -1,6 +1,6 @@
 {{
     title: '解析 npm-package.json',
-    poster: '',
+    poster: 'static/npm.png',
     date: '2018-07-16',
     id: '3',
     desc: '解析 npm-package.json'
