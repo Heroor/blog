@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Bener</title>
+    <title>bener</title>
   </head>
   <body>
     <div id="app"></div>
+    <script>
+      navigator.serviceWorker && navigator.serviceWorker.register('./static/sw.js').then(res => console.log('sw has registed')).catch(console.log)
+    </script>
     <!-- built files will be auto injected -->
   </body>
 </html>
