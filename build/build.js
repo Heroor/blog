@@ -36,7 +36,7 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
 
     // npm run build --pub
     if (process.env.npm_config_pub) {
-      require('./publish-app')
+      require('./publish')
     }
   })
 })

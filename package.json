@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "build": "node build/build.js",
-    "publish": "node build/publish-app.js"
+    "publish": "node build/publish.js"
   },
   "dependencies": {
     "markdown-it": "^8.4.1",
