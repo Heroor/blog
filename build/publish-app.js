@@ -4,6 +4,10 @@ const execAsync =  util.promisify(exec)
 const chalk = require('chalk')
 
 ;(async function () {
+  // // npm run publish --build
+  // if (process.env.npm_config_build) {
+  //   require('./build')
+  // }
   console.log(chalk.cyan('begin to public app...'))
   try {
     await execAsync('git add .', {cwd: './dist'})

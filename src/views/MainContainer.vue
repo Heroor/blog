@@ -18,7 +18,6 @@ export default {
 
 .main-container {
   max-width: $container-width;
-  padding: 0 10px;
   margin: 0 auto;
 }
 </style>

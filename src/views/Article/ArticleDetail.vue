@@ -43,6 +43,7 @@ export default {
   padding 20px 40px
   border-radius 6px
   background #fff
+  margin 0 10px
 .title
   padding 50px 0 100px
   font-size $font-title + 5px
@@ -58,4 +59,10 @@ export default {
   list-style disc
 .md >>> ol
   list-style decimal
+
+
+@media screen and (max-width 640px)
+  .detail__wrap
+    padding 20px
+    margin 0
 </style>

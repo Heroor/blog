@@ -17,8 +17,14 @@ export default {
 .info-container
   min-height 300px
   padding 40px
-  background #fff
+  margin 0 10px
   border-radius 6px
+  background #fff
 .info__container
   font-size 14px
+
+@media screen and (max-width 640px)
+  .info-container
+    padding 20px
+    margin 0
 </style>

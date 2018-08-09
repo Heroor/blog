@@ -5,9 +5,8 @@ export default {
       let top = document.scrollingElement.scrollTop
       const step = top / (250 / 16)
       requestAnimationFrame(function scroll () {
-        top-=step
+        top -= step
         document.scrollingElement.scrollTop = top
-        console.log(top)
         top > 0 && requestAnimationFrame(scroll)
       })
     }
