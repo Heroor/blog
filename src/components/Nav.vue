@@ -8,11 +8,12 @@
           <ul class="nav-ul">
             {routes.map((route, i) => (
               route.isNav &&
-              <li class="nav-item" key={i}>
-                <router-link to={route.redirect || route.path} class="underline">
-                  {route.name}
-                </router-link>
-              </li>
+              <router-link tag="li" key={i}
+                class="nav-item underline"
+                to={route.redirect || route.path}
+              >
+                {route.name}
+              </router-link>
             ))}
           </ul>
         </div>
@@ -32,19 +33,19 @@
     background $nav-bg
   .nav-item
     display inline-block
-    margin 0 10px
-    a
-      line-height 48px
-      display inline-block
-      padding 0 8px
-      text-decoration none
-      transition(.3s)
-      color #d7e2e6
-      &:hover
-        color #fff
-      &.router-link-active::after
-        width 100%
-        border-radius 1px
-      &.underline::after
-        bottom 8px
+    line-height 48px
+    padding 0 6px
+    cursor pointer
+    transition(.3s)
+    color #fff
+    opacity .75
+    &:not(:last-child)
+      margin-right 15px
+    &:hover
+      opacity .9
+    &.router-link-active::after
+      width 100%
+      border-radius 1px
+    &.underline::after
+      bottom 8px
 </style>

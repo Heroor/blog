@@ -96,12 +96,12 @@ for d in 100 300 500 1000 2000
     width 0
     height 2px
     transform translateX(-50%)
-    transition all .3s ease-out
+    transition .3s ease-out
+    transition-property width, border-radius
+    will-change width, border-redius
     border-radius 50%
-    background #fff
-    opacity 0.618
+    background currentColor
   &:hover::after
     width 100%
-    transition all .1s ease-out
+    transition .1s ease-out
     border-radius 1px
-    opacity 1
