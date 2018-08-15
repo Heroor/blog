@@ -1,5 +1,4 @@
 const cacheName = 'cache'
-console.log('swswswswsww')
 self.addEventListener('fetch', e => {
   console.log('event', e)
   e.respondWith(
