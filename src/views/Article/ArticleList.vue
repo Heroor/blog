@@ -74,6 +74,7 @@
       color $nav-bg
   .article__desc
     flex 1
+    line-height 1.5
     margin-bottom 20px
     min-height 50px
     font-size $font-content + 2

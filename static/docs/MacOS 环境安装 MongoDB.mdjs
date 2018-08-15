@@ -3,7 +3,7 @@
     poster: '',
     date: '2018-07-06',
     id: '2',
-    desc: 'MacOS 环境安装 MongoDB'
+    desc: '在 MacOS 环境中安装 MongoDB'
 }}
 # MongoDB
 
