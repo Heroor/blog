@@ -1,4 +1,5 @@
 <script>
+import { mapState } from 'vuex'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import GoTop from '@/components/GoTop'

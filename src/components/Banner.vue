@@ -1,13 +1,10 @@
 <script>
-  const bannerUrl = 'http://oueon55l6.bkt.clouddn.com/banner.jpg'
-  const title = 'title'
-  const desc = 'desc'
-
   export default {
     functional: true,
-    render () {
+    render (h, context) {
+      const { hideBanner, bannerUrl, bennerTitle, bennerDesc } = context.props.bannerInfo
       return (
-        <div class={`banner-wrap ${!bannerUrl && 'simple'}`}>
+        <div class={`banner-wrap ${(hideBanner || !bannerUrl) && 'simple'}`}>
           <div class="banner-container posi--align">
             <img src={bannerUrl} ondragstart={() => false} class="banner transition-05 posi--align" />
           </div>
