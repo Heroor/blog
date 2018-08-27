@@ -26,9 +26,9 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 ## TODO:
 - [x] change all template to jsx
 - [ ] img-blur-loading
-- [ ] refactor common css to stylus
-- [ ] refactor mdjs-loader
+- [x] refactor common css to stylus
+- [x] refactor mdjs-loader
 - [x] introduction of vConsole
-- [ ] introduction of vuex
+- [x] introduction of vuex
 - [ ] introduction of ts
 - [ ] add theme feat
