@@ -11,7 +11,7 @@
                 <div class="article__content">
                   <div class="article__left">
                     <router-link
-                      class="w-b--b-a article__title"
+                      class="w-b--all article__title"
                       to={"article/" + v.id} tag="h2"
                     >
                       {v.title}
@@ -21,7 +21,7 @@
                         <img class="article__img" src={v.poster} alt="" />
                       </div>
                     )}
-                    <p class="article__desc w-b--b-w w-b--b-a">{v.desc}</p>
+                    <p class="article__desc w-b--word w-b--all">{v.desc}</p>
                     <span class="article__date">{v.date}</span>
                   </div>
                   {v.poster && (

@@ -3,7 +3,6 @@
     functional: true,
     render (h, context) {
       const { hideBanner, bannerUrl, bennerTitle, bennerDesc } = context.data
-      console.log(context)
       return (
         <div class={`banner__wrap ${(hideBanner || !bannerUrl) && 'simple'}`}>
           <div class="banner__container posi--align">

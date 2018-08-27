@@ -13,7 +13,7 @@ export default {
   },
   render () {
     return (
-      <div class="go-top t--c" onClick={this.goTop}>Top</div>
+      <div class="go-top text--c" onClick={this.goTop}>Top</div>
     )
   }
 }

@@ -24,7 +24,7 @@ export default {
       (this.$refs.contentContainer.innerHTML = content || "")
     return (
       <div class="detail__wrap">
-        <h1 class="title t--c w-b--b-w">{title}</h1>
+        <h1 class="title text--c w-b--word">{title}</h1>
         {/*<p class="desc">{desc}</p>*/}
         <div ref="contentContainer" class="content md" />
         <div class="date m-t--50">{date}</div>

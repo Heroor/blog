@@ -1,66 +1,27 @@
-// 清楚浮动
-.clearfix
-  &:after
-    content ''
-    display block
-    height 0
-    line-height 0
-    clear both
-    visibility hidden
+@import 'mix'
 
-// 水平定位居中
-.posi--align
-  position absolute
-  left 50%
-  transform translateX(-50%)
-
-// 垂直定位居中
-.posi--vert
-  position absolute
-  top 50%
-  transform translateY(-50%)
-
-// 水平垂直定位居中
-.posi--center
-  position absolute
-  top 50%
-  left 50%
-  transform translate(-50%, -50%)
-
-// 公用排版类
-.t--l
-  text-align left
-
-.t--c
-  text-align center
-
-.t-r
-  text-align right
-
-.f--l
-  float left
-
-.f--r
-  float right
-
-.t-a--c
-  text-align center
-
-.t-a--l
-  text-align left
-
-.t-a--r
-  text-align right
-
-.m--0-auto
+/* 公用排版类 */
+.m--0auto
   margin 0 auto
 
-.w-b--b-a
-  word-break break-all
+// word-break
+// eg: .w-b--all
+for ty in (all break-all) (word break-word)
+  .w-b--{ty[0]}
+    word-break ty[1]
 
-.w-b--b-w
-  word-break break-word
+// float
+// eg: .f--l
+for po in (r right) (l left)
+  .f--{po[0]}
+    float po[1]
 
+// text-align
+// eg: .text--c
+
+for po in (r right) (l left) (c center)
+  .text--{po[0]}
+    text-align po[1]
 
 // margin padding
 // eg: m-t--10
@@ -78,6 +39,13 @@ for v in 1..5
       .{ty[0]}-{po[0]}--{v*100}
         {ty[1]}-{po[1]} v*100px
 
+// 水平、垂直居中
+// eg: .posi-center
+.posi
+  for po in align vert center
+    &--{po}
+      posi(po)
+
 // 全局缓动类
 // eg: .transition--300
 for d in 100 300 500 1000 2000
@@ -85,23 +53,10 @@ for d in 100 300 500 1000 2000
     transition all (d / 1000)s
 
 
-// 下划线动画
+/* 链接下划线特效 */
 .underline
-  position relative
-  &::after
-    content ''
-    position absolute
-    left 50%
-    bottom 0
-    width 0
-    height 2px
-    transform translateX(-50%)
-    transition .3s ease-out
-    transition-property width, border-radius
-    will-change width, border-redius
-    border-radius 50%
-    background currentColor
-  &:hover::after
-    width 100%
-    transition .1s ease-out
-    border-radius 1px
+  underline()
+
+/* 清除浮动 */
+.clearfix
+  clearfix()
