@@ -1,9 +1,9 @@
-const context = require.context('../../static/docs', true, /\.mdjs$/)
+const context = require.context('@/docs', true, /\.mdjs$/)
 
 export const articleList = context.keys().map(path => {
-  const mdjs = require('../../static/docs/' + path.slice(2))
+  const mdjs = require('@/docs/' + path.slice(2))
   return {
     ...mdjs.info,
-    content: mdjs.content.trim()
+    content: mdjs.content
   }
-}).sort((a, b) => new Date(b.date) - new Date(a.date))
+}).sort((a, b) => a.date < b.date)

@@ -43,7 +43,7 @@ module.exports = {
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {
-        test: /\.mdjs$/,
+        test: /\.mdj?s?$/,
         use: [{
           loader: path.resolve(__dirname + '/loaders/mdjs-loader.js')
         }]
