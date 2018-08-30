@@ -10,12 +10,14 @@
               <li key={i} class="article-item">
                 <div class="article__content">
                   <div class="article__left">
-                    <router-link
-                      class="w-b--all article__title"
-                      to={"article/" + v.id} tag="h2"
-                    >
-                      {v.title}
-                    </router-link>
+                    <div>
+                      <router-link tag="h2"
+                        to={"article/" + v.id}
+                        class="w-b--all article__title"
+                      >
+                        {v.title}
+                      </router-link>
+                    </div>
                     {v.poster && (
                       <div class="article__right--moble">
                         <img class="article__img" src={v.poster} alt="" />
