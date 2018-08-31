@@ -12,7 +12,10 @@
                   <div class="article__left">
                     <div>
                       <router-link tag="h2"
-                        to={"article/" + v.id}
+                        to={{
+                          name: 'ArticleDetail',
+                          params: { id: v.id }
+                        }}
                         class="w-b--all article__title"
                       >
                         {v.title}
