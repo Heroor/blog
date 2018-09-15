@@ -7,7 +7,8 @@
         <div class="nav-wrap">
           <ul class="nav-ul">
             {routes.map((route, i) => (
-              route.isNav &&
+              route.meta &&
+              route.meta.isNav &&
               <router-link tag="li" key={i}
                 class="nav-item underline"
                 to={route.redirect || route.path}
