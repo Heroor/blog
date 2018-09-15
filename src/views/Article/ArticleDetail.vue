@@ -2,6 +2,12 @@
 import {articleList} from "@/service/mock.js"
 export default {
   name: 'ArticleDetail',
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       map: {
@@ -15,7 +21,7 @@ export default {
     }
   },
   mounted() {
-    const { id } = this.$route.params
+    const id = this.id
     articleList.some(v => v.id === id && (this.map = v))
   },
   render() {
