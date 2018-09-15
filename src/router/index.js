@@ -15,5 +15,8 @@ export default new Router({
     path: '*',
     name: '404',
     component: _import('404')
-  }]
+  }],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
