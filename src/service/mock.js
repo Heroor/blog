@@ -8,4 +8,4 @@ export const articleList = fileList.map(path => {
     ...mdjs.info,
     content: mdjs.content
   }
-}).sort((a, b) => a.date < b.date)
+}).sort((a, b) => +new Date(b.date) - +new Date(a.date))

@@ -2,7 +2,7 @@
   title: '浅析 AMD CMD UMD CommonJS 模块规范',
   poster: '',
   date: '2018-07-17',
-  id: '4',
+  id: '2018-07-17',
   desc: 'js 中有各种模块规范，例如 AMD CMD UMD CommonJS 等，他们是怎样规定的呢？一起来看一看'
 }}
 
