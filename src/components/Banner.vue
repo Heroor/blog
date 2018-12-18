@@ -28,7 +28,7 @@
         height 20px
     &__container
       overflow hidden
-      height $banner-height
+      height 100%
       width 280%
       border-radius 50% 50% 0 0
       background $page-bg
