@@ -1,9 +1,9 @@
 {{
-    title: 'ts',
-    poster: '',
-    date: '2018-08-30',
-    id: '5',
-    desc: 'TypeScript 是 JavaScript 的超集，她为 JavaScript 提供了类型注解、静态类型检查的功能，以及一些新的特性，TypeScript 可以编译成 JavaScript 代码，在不同平台上运行'
+  title: 'ts',
+  poster: '',
+  date: '2018-08-30',
+  id: '2018-08-30',
+  desc: 'TypeScript 是 JavaScript 的超集，她为 JavaScript 提供了类型注解、静态类型检查的功能，以及一些新的特性，TypeScript 可以编译成 JavaScript 代码，在不同平台上运行'
 }}
 
 > TypeScript 是 JavaScript 的超集，她为 JavaScript 提供了类型注解、静态类型检查的功能，以及一些新的特性，TypeScript 可以编译成 JavaScript 代码，在不同平台上运行
@@ -98,3 +98,5 @@ let value: (string | number) = 'My name is Tom'
 let isLongString: boolean = (value as string).length > 10
 let hi: string = 'hello! ' + <string>value
 ```
+
+对引用类型做类型检查

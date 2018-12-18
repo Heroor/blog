@@ -4,11 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from '@/store'
-import VConsole from 'vconsole'
+// import VConsole from 'vconsole'
 
-if (process.env.NODE_ENV === 'development') {
-  new VConsole()
-}
+process.env.NODE_ENV === 'development' //&& new VConsole()
 
 Vue.config.productionTip = false
 

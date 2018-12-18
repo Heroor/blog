@@ -21,16 +21,20 @@ export default {
 
 <style scoped lang="stylus">
 .go-top
+  user-select none
   position fixed
   bottom 30px
   right 30px
-  width 45px
-  height 45px
-  line-height 45px
-  font-size 10px
+  width 40px
+  line-height 40px
+  font-size 12px
   border-radius 50%
   background #fff
   box-shadow 0 0 8px rgba(0, 0, 0, .2)
   cursor pointer
   z-index 1000
+  &:hover
+    box-shadow 0 0 15px rgba(0, 0, 0, .2)
+  &:active
+    box-shadow 0 0 8px rgba(0, 0, 0, .2)
 </style>
