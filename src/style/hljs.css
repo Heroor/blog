@@ -1,0 +1,176 @@
+.md .hljs-comment,
+.md .hljs-quote {
+  color: #998
+}
+
+.md .hljs-keyword,
+.md .hljs-selector-tag,
+.md .hljs-subst {
+  color: #333;
+  font-weight: 700
+}
+
+.md .hljs-literal,
+.md .hljs-number,
+.md .hljs-tag .hljs-attr,
+.md .hljs-template-variable,
+.md .hljs-variable {
+  color: teal
+}
+
+.md .hljs-doctag,
+.md .hljs-string {
+  color: #d14
+}
+
+.md .hljs-section,
+.md .hljs-selector-id,
+.md .hljs-title {
+  color: #900;
+  font-weight: 700
+}
+
+.md .hljs-subst {
+  font-weight: 400
+}
+
+.md .hljs-class .hljs-title,
+.md .hljs-type {
+  color: #458;
+  font-weight: 700
+}
+
+.md .hljs-attribute,
+.md .hljs-name,
+.md .hljs-tag {
+  color: navy;
+  font-weight: 400
+}
+
+.md .hljs-link,
+.md .hljs-regexp {
+  color: #009926
+}
+
+.md .hljs-bullet,
+.md .hljs-symbol {
+  color: #990073
+}
+
+.md .hljs-built_in,
+.md .hljs-builtin-name {
+  color: #0086b3
+}
+
+.md .hljs-meta {
+  color: #999;
+  font-weight: 700
+}
+
+.md .hljs-deletion {
+  background: #fdd
+}
+
+.md .hljs-addition {
+  background: #dfd
+}
+
+.md .hljs-emphasis {
+  font-style: italic
+}
+
+.md .hljs-strong {
+  font-weight: 700
+}
+
+.md img {
+  max-height: none
+}
+
+.md figure {
+  margin: 22px auto
+}
+
+.md figure figcaption {
+  margin-top: 2px;
+  line-height: 1.6
+}
+
+.md blockquote {
+  color: #666;
+  padding: 1px 23px;
+  margin: 22px 0;
+  border-left: 4px solid #cbcbcb;
+  background-color: #f8f8f8
+}
+
+.md blockquote:after {
+  display: block;
+  content: ""
+}
+
+.md blockquote>p {
+  margin: 10px 0
+}
+
+.md blockquote.warning {
+  position: relative;
+  border-left-color: #f75151;
+  margin-left: 8px
+}
+
+.md blockquote.warning:before {
+  position: absolute;
+  top: 14px;
+  left: -12px;
+  background: #f75151;
+  border-radius: 50%;
+  content: "!";
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.md ol li.task-list-item,
+.md ul li.task-list-item {
+  list-style: none
+}
+
+.md ol li.task-list-item ol,
+.md ol li.task-list-item ul,
+.md ul li.task-list-item ol,
+.md ul li.task-list-item ul {
+  margin-top: 0
+}
+
+.md ol li {
+  padding-left: 6px
+}
+
+.md pre {
+  position: relative;
+  line-height: 1.75
+}
+
+.md pre>code {
+  font-size: 12px
+}
+
+/* .md pre>code.hljs[lang] {
+  padding: 18px 15px 12px
+} */
+
+.md pre>code.hljs[lang]:before {
+  content: attr(lang);
+  position: absolute;
+  right: 15px;
+  top: 2px;
+  color: hsla(0, 0%, 54.9%, .8)
+}
+
+.md pre>code.hljs[lang][lang=bash]:before {
+  content: ""
+}

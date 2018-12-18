@@ -35,6 +35,7 @@ export default {
 </script>
 
 <style src="@/style/markdown.css"></style>
+<style src="@/style/hljs.css"></style>
 <style scoped lang="stylus">
 @import '../../style/mix.styl'
 
