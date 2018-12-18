@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .move {
+      animation: move 3s linear infinite;
+    }
+    @keyframes move {
+      from {
+        stroke-dasharray: 0 857.92;
+      }
+      to {
+        stroke-dasharray: 857.92 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" width="400" height="250">
+    <path
+      class="move"
+      id="path"
+      ref="path"
+      fill="none"
+      d="M9,183.36C133.52,69,104.3,32.15,57.28,52.48s-36.85,82.59,44.47,130.87S142.42,79.17,222.46,37.24
+s174.08,160.1,168.99,170.26"
+      stroke="red">
+    </path>
+  </svg>
+
+</body>
+
+</html>

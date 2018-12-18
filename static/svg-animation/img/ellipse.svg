@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+<ellipse
+  cx="100"
+  cy="60"
+  rx="80"
+  ry="50"
+  fill="pink"
+  stroke="red"
+  stroke-width="5"
+>
+</ellipse>
+</svg>

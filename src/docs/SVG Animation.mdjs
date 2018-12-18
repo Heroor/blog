@@ -1,0 +1,616 @@
+{{
+  title: 'SVG Animation',
+  poster: '',
+  date: '2018-12-12',
+  id: '2018-12-12',
+  desc: '这篇文章将介绍 SVG 与 SVG 基本图形的绘制，以及使用 SVG 来制作有趣的动画效果'
+}}
+
+在介绍 SVG 之前，我们首先了解一下图形
+
+## 图形
+
+计算机中图形的表示方式分为两种：栅格图形 和 矢量图形
+
+### 栅格图形
+
+栅格图形又称为位图或点阵图，使用像素阵列表示图像，比如 png，jpg，gif 等图片格式都是栅格图形，每个像素都有特定的位置与颜色值，可以表示的颜色由每个像素的携带的色值决定，像素与颜色信息越多，图片储存空间就越大
+
+![demo1](./static/svg-animation/img/demo1.jpg)
+
+一般浏览器使用的都是栅格图形，但是它也有缺点，就是当小的图形被放大显示时，图形边缘会产生锯齿，使得显示效果失真，例如这样：
+
+![demo2](./static/svg-animation/img/demo2.png)
+
+
+
+### 矢量图形
+
+矢量图形是计算机用点、直线或者多边形等基于数学方程的几何图形表示的图像。
+
+因为矢量图形是根据坐标绘制的，所以与分辨率无关，放大与缩小都不会丢失细节，曲线的边缘更加平滑，不影响清晰度，且保存体积比栅格图形小
+
+![download](./static/svg-animation/img/tool.svg)![star](./static/svg-animation/img/star.svg)![tree](./static/svg-animation/img/tree.svg)
+
+
+
+## SVG
+
+### SVG 即可缩放矢量图形（Scalable Vector Graphics）
+
+SVG 使用 XML 来描述，属于 XML 分支语言的一种，可以用于绘制矢量图形。SVG 通过定义线或形状来创建一个图形，也可以修改位图，或者将两种方式结合起来创建图形。
+
+
+HTML 提供了标题、段落、表格等内容的元素，与此类似，在 SVG 中也提供了一些元素，比如用于定义圆、矩形、曲线和多边形等。一个简单的SVG文档由 `<svg>` 根元素（相当于 `<html>` 根元素）和基本的形状元素构成。另外还有一个 `<g>` 元素，用来把若干个基本形状编写成一个组。当然 SVG 可以与 javascript、css 结合起来使用，当以 `.svg` 为后缀保存在文件里时，可以被 img、iframe、background 引用。
+
+
+SVG 属于 XML 语言，是区分大小写的，这一点与 HTML 不同；与 HTML 相同的是：默认先出现的元素会出现在底层，后出现的元素会绘制在顶层，子元素会继承父元素的一些属性，比如：opacity、transform。
+
+
+***注意：SVG 元素是无法通过 `z-index` 修改层级的***
+
+
+
+### SVG 的绘制过程
+
+1. 解析 SVG 文档
+2. 列出绘制元素列表
+3. 计算出每个绘制元素的 path 对应的直线长度
+4. 根据动画时长和总长度，在每一帧依次画出指定长度的 path
+5. path 绘制完成后，绘制 SVG fill
+
+
+
+### SVG 的基本形状
+
+svg 的命名空间：
+
+参考：https://www.jianshu.com/p/c590983dbc87
+
+`<svg xmlns="http://www.w3c.org/2000/svg"></svg>` 标记 xml 语言是 SVG，它只是一个字符串标识
+
+
+
+#### SVG 元素的几个常用属性：
+
+1. x/y 图形起始点的坐标
+2. width/height 图形的宽高
+3. fill: 图形的填充颜色（有的图形没有 `fill` 属性，例如 `<line>`）
+  `fill` 属性的默认值为黑色 #000，将 `fill` 设置为 `none` 为透明
+4. stroke: 边框或线段的颜色
+  `stroke` 的默认没有颜色
+5. stroke-width: 边框或线段的宽度
+  `stroke-width` 默认为 `1`
+
+
+#### SVG 属性值可能是多种形式，值可以是一个数字集合，以 `空格` 或 `,` 分割：
+
+例如 points 属性的写法：
+```
+points="10,20,30,40" // 可以逗号分隔
+points="10 20 30 40" // 可以空格分隔
+points="10,20 30,40" // 建议用逗号分隔 x/y 的值，用空格分隔每个点
+```
+
+
+
+#### rect 矩形
+
+矩形就是长方形或者正方形，通过 `<rect>` 元素来绘制，包括圆角矩形
+
+属性：
+x: 矩形左上角的 x 坐标
+y: 矩形左上角的 y 坐标
+width: 矩形的宽度
+height: 矩形的高度
+rx: 圆角效果时圆角沿 x 轴的半径
+ry: 圆角效果时圆角沿 y 轴的半径
+fill: 填充的颜色
+stroke: 边框颜色
+stroke-width: 边框的宽度
+
+```xml
+<rect
+  x="10"
+  y="10"
+  width="100"
+  height="100"
+  fill="red"
+  stroke="yellow"
+  stroke-width="4"
+>
+</rect>
+```
+
+![rect](./static/svg-animation/img/rect.svg)
+
+
+
+#### circle 圆形
+
+圆形通过 `<circle>` 元素来绘制
+
+circle 具有 rect 的部分属性：
+fill: 填充的颜色
+stroke: 边框的颜色
+stroke-width: 边框的宽度
+
+自己特有的属性：
+r: 半径
+cx: 圆心在 x 轴上的坐标
+cy: 圆心在 y 轴上的坐标
+```xml
+<circle
+  cx="50"
+  cy="50"
+  r="40"
+  fill="#555"
+  stroke="gray"
+  stroke-width="4"
+>
+</circle>
+```
+
+![circle](./static/svg-animation/img/circle.svg)
+
+#### ellipse 椭圆
+
+椭圆与圆最大的区别是：圆拥有一个半径，椭圆有两个半径
+椭圆具有两个轴上的半径，x 轴的 `rx`，y 轴的 `ry`
+
+![椭圆](./static/svg-animation/img/ellipse.gif)
+
+属性：
+cx: 圆心在 x 轴的坐标
+cy: 圆心在 y 轴的坐标
+rx: 椭圆在 x 轴的半径
+ry: 椭圆在 y 轴的半径
+fill: 填充的颜色
+stroke: 边框的颜色
+stroke-width: 边框的宽度
+```xml
+<ellipse
+  cx="100"
+  cy="60"
+  rx="80"
+  ry="50"
+  fill="pink"
+  stroke="red"
+  stroke-width="5"
+>
+</ellipse>
+```
+![ellipse](./static/svg-animation/img/ellipse.svg)
+
+***当 rx 和 ry 相等时，绘制出的 `<ellipse>` 和 `<circle>` 是相等的***
+
+
+
+#### polygon 多边形
+
+多边形最重要的属性是顶点points，每个顶点都是由x、y坐标组成的，每个点之间相互连接，最后一个点再与第一个点连接起来形成一个图形。
+points的值需要根据多边形来决定，例如三角形有三个顶点，所以points由三个值组成，依次写每个点的x、y坐标就可以，推荐每个点的坐标x、y用逗号隔开，每个定点之间用空格隔开：
+```xml
+<!-- 绘制一个五边形 -->
+<polygon
+  points="10,10 120,10 120,120 80,150 10,120"
+  fill="pink"
+  stroke-width="2"
+  stroke="red"
+>
+</polygon>
+```
+fill: 填充的颜色
+stroke: 边框的颜色
+stroke-width: 边框的宽度
+*多边形最少由三个点组成*
+
+![polygon](./static/svg-animation/img/polygon.svg)
+
+
+
+#### line 直线
+绘制直线要使用 `<line>` 标签
+两个点可以确定一条直线，那么 line 的属性对应为：
+x1: 起点的 x 坐标
+y1: 起点的 y 坐标
+x2: 终点的 x 坐标
+y2: 终点的 y 坐标
+stroke: 直线的颜色
+stroke-width: 直线的宽度
+*直线是没有 fill 属性的*
+```xml
+<line
+  x1="10"
+  y1="50"
+  x2="200"
+  y2="50"
+  stroke="#555"
+  stroke-width="3"
+>
+</line>
+```
+
+![line](./static/svg-animation/img/line.svg)
+
+
+
+#### polyline 折线
+
+折线与多边形很类似，都是通过多个顶点points来绘制的，只不过最后一个点不会与第一个点连接起来，当然，使用折线也可以绘制出多边形。
+
+points: 起点、终点或折线转变方向的地方
+fill: 折线起点与终点连接起来的区域的填充颜色
+stroke: 折线的颜色
+stroke-width: 折线的宽度
+```xml
+<polyline
+  points="30,30 30,70 70,70 70,120 120,50"
+  stroke="red"
+  fill="none"
+>
+</polyline>
+```
+
+![polyline](./static/svg-animation/img/polyline.svg)
+
+
+
+#### path 路径
+
+SVG中所有的图形都可以用path来绘制
+
+属性：
+
+stroke：路径的颜色
+
+stroke-width：路径的宽度
+
+stroke-dasharray：它是一个 `<length>` 和 `<percentage>` 数列，数与数之间用逗号或者空白隔开：`4 6 4 6`， 指定短划线和缺口的长度。如果提供了奇数个值，则这个值的数列重复一次，从而变成偶数个值。因此，`5,3,2` 等同于 `5,3,2,5,3,2`
+
+stroke-dashoffset：标识 dash 的起始位置
+
+![stroke-dasharray](./static/svg-animation/img/stroke-dasharray.png)
+
+d：路径命令的集合，包含多个指令：
+
+**其中参数大写代表绝对坐标，小写代表与前一个坐标的相对坐标**
+| 指令   | 参数                                       | 描述                                       |
+| ---- | ---------------------------------------- | ---------------------------------------- |
+| M    | x y                                      | 起始点的坐标x, y（Move to）                      |
+| L    | x y                                      | 从当前点的坐标画直线到指定点的x，y坐标（Line to）            |
+| H    | x                                        | 从当前点的坐标画水平直线到指定的x轴坐标（Horizontal line to） |
+| V    | y                                        | 从当前点的坐标画垂直直线到指定的y轴坐标（Vertical line to）   |
+| C    | x1 y1 x2 y2 x y                          | 从当前点的坐标画贝塞尔曲线到指定点的x, y坐标，其中x1，y1及x2，y2为控制点（Curve） |
+| S    | x2 y2 x y                                | 从当前点的坐标画反射的贝塞尔曲线到指定点的x，y坐标，其中x2，y2为反射的控制点（Smooth curve） |
+| Q    | x1 y1 x y                                | 从当前点的坐标画反射二次贝塞尔曲线到指定点的x y坐标，其中x1 y1为控制点（Quadratic Bézier curve） |
+| T    | x y                                      | 从当前点到坐标画反射二次贝塞尔曲线到指定点的x, y坐标，以前一个坐标为反射控制点（Smooth Quadratic Bézier curve） |
+| A    | rx ry x-axis-rotation large-arc-flag-sweep-flag x y | 从当前点的坐标画椭圆形到指定点的x，y坐标，其中rx，ry为椭圆形的x轴及y轴的半径，x-axis-rotation是弧线与x轴的旋转角度，large-arc-flag则设定1(最大角度的弧线)或0(最小角度的弧线)，sweep-flag设定方向为1(顺时针方向)或0(逆时针方向)（Arc） |
+| Z    |                                          | 关闭路径，将当前坐标与第一个点的坐标连接起来（Closepath）        |
+
+示例如下：
+```xml
+<path
+  fill="none"
+  d="M2,82 L240,206 C254,214 272,209 279,195 L323,117"
+  stroke="#D31E1E"
+  stroke-width="3">
+</path>
+```
+
+![path](./static/svg-animation/img/path.svg)
+
+
+
+### 其他标签
+
+#### g
+
+g 标签表示分组，可以把任意图形划为一组：
+
+```xml
+<g id="demo" stroke="green" fill="white" stroke-width="5">
+  <circle cx="25" cy="25" r="15"/>
+  <circle cx="40" cy="25" r="15"/>
+  <circle cx="55" cy="25" r="15"/>
+  <circle cx="70" cy="25" r="15"/>
+</g>
+```
+
+分组里可以有标签的描述：`<desc>`
+
+```xml
+<g id="demo" stroke="green" fill="white" stroke-width="5">
+  <desc>Just Demo</desc>
+  <circle cx="25" cy="25" r="15"/>
+</g>
+```
+
+
+
+#### use
+
+use 标签可以复用 `<g>` 标签的分组
+
+将 `xlink:href` 属性的值设为 group 的 id，就可以引用 group 的图形：
+
+```xml
+<g id="Port">
+  <circle style="fill: inherit;" r="10"/>
+</g>
+<use x="50" y="30" xlink:href="#Port" class="classA"/>
+```
+
+use 标签不可覆盖 g 分组内图形的原有样式
+
+style > 行内属性样式
+
+
+
+
+
+#### defs
+
+defs 可以保存代码，不被浏览器解析，可以被 use 引用，其中包含的分组可以被 use 标签的 style 属性覆盖掉样式：
+
+```xml
+<defs>
+  <g id="Port">
+    <circle style="fill: inherit;" r="10"/>
+  </g>
+</defs>
+<use x="50" y="50" xlink:href="#Port" style="fill: blue;"/>
+```
+
+
+
+### symbol
+
+symbol 与 g 标签类似，也可以分组并定义一些模板且不被浏览器解析，使用 use 来使用模板：
+
+```xml
+<symbol id="sym01" viewBox="0 0 150 110">
+	<circle cx="50" cy="50" r="40" stroke-width="8" stroke="red" fill="red"/>
+	<circle cx="90" cy="60" r="40" stroke-width="8" stroke="green" fill="white"/>
+</symbol>
+<use href="#sym01" x="0" y="0" width="100" height="50"/>
+```
+
+
+
+
+
+## SVG 动画
+
+### animate
+
+SVG 标签的 style 属性可以定义 SVG 的样式与动画效果，除此以外还可以使用 animate 标签
+
+属性：
+
+attributeName：需要被动画改变的属性名
+
+attributeType：定义了目标属性的命名空间 CSS | XML | auto
+
+form：动画发生时，被修改属性的初始值
+
+to：动画发生时，被修改属性的最终值
+
+begin：动画的开始时间
+
+dur：动画持续的时长
+
+repeatCount：动画重复的次数。indefinite：无限反复
+
+
+
+用 animate 元素定义 SVG 的动画效果：
+```xml
+<rect fill="#2196F3" x="10" width="20" height="100">
+  <animate
+    attributeName="width"
+    attributeType="XML"
+    to="300"
+    begin="0s"
+    dur="3s"
+    repeatCount="indefinite"
+  ></animate>
+  <animate
+    attributeName="fill"
+    attributeType="XML"
+    to="#F44336"
+    begin="0s"
+    dur="3s"
+    repeatCount="indefinite"
+  ></animate>
+</rect>
+```
+![animate](./static/svg-animation/img/animate.svg)
+
+
+
+### animationTransform
+
+animationTransform 标签用来做变形动画
+
+属性：
+
+type：定义了动画 `transform` 的类型
+
+其他属性与 `<animate>` 一致
+```xml
+<polygon points="30,30 100,30 100,100 30,100" fill="#f44333">
+  <animateTransform
+    attributeName="transform"
+    attributeType="XML"
+    type="rotate"
+    from="0 60 70"
+    to="360 60 70"
+    dur="10s"
+    repeatCount="indefinite" />
+</polygon>
+```
+![animateTransform](./static/svg-animation/img/animateTransform.svg)
+
+
+
+### animate morph
+
+animate morph 可以做图形内部的渐变
+
+
+
+
+### animateMotion
+
+animateMotion 可以让图形按指定路径运动
+
+属性：
+
+from / to：指定运动两点的位置，以元素的坐标为原点
+
+dur：动画执行时长
+
+fill：指定动画结束后的元素的位置。freeze：停留在原地；remove：回到起始位置
+
+rotate：旋转角度。 auto：让物体垂直于路径的切线方向运动；auto-reverse：如 auto对称相反；Number：自定义旋转角度
+
+```xml
+<circle cx="25" cy="25" r="25" fill="#2196F3">
+  <animateMotion from="0,0" to="100,100" dur="1s" fill="freeze" />
+</circle>
+
+<rect width="50" height="50" fill="#F44336">
+  <animateMotion from="0,0" to="100,100" dur="1s" repeatCount="indefinite" />
+</rect>
+```
+
+![animateMotion1](./static/svg-animation/img/animateMotion1.svg) ![animateMotion2](./static/svg-animation/img/animateMotion2.svg)
+
+
+
+复杂的路径可以使用 `path` 属性：
+
+```xml
+<rect width="50" height="50" fill="#F44336">
+  <animateMotion
+    path="M3,52.98c47.18-38,36.11-50.25,18.3-43.49S7.33,36.93,38.15,52.98S53.56,18.35,83.89,4.42
+	s65.96,53.2,64.04,56.58"
+    dur="3s"
+    repeatCount="indefinite" />
+</rect>
+```
+
+![animateMotion3](./static/svg-animation/img/animateMotion3.svg)
+
+也可以使用 `<mpath>` 标签来引用 `<path>` 的路径：
+
+```xml
+<path id="path"
+  fill="none"
+  stroke="red"
+  d="M3,95.26C69.71,25.41,54.05,2.91,28.87,15.32S9.13,65.77,52.69,95.26s21.78-63.64,64.67-89.25 s93.26,97.78,90.53,103.99">
+</path>
+
+<circle r="5" fill="#2196F3">
+  <animateMotion rotate="auto-reverse" dur="5s" repeatCount="indefinite">
+    <mpath href="#path"/>
+  </animateMotion>
+</circle>
+```
+![animateMotion4](./static/svg-animation/img/animateMotion4.svg)
+
+修改 rotate 属性：
+
+`auto-reverse`
+```xml
+<path id="path"
+  fill="none"
+  stroke="red"
+  d="M3,95.26C69.71,25.41,54.05,2.91,28.87,15.32S9.13,65.77,52.69,95.26s21.78-63.64,64.67-89.25 s93.26,97.78,90.53,103.99">
+</path>
+
+<rect width="10" height="10" fill="#2196F3">
+  <animateMotion rotate="auto-reverse" dur="5s" repeatCount="indefinite">
+    <mpath href="#path"/>
+  </animateMotion>
+</rect>
+```
+![animateMotion5](./static/svg-animation/img/animateMotion5.svg)
+
+`auto`
+```xml
+<path id="path"
+  fill="none"
+  stroke="red"
+  d="M3,95.26C69.71,25.41,54.05,2.91,28.87,15.32S9.13,65.77,52.69,95.26s21.78-63.64,64.67-89.25 s93.26,97.78,90.53,103.99">
+</path>
+
+<rect width="10" height="10" fill="#2196F3">
+  <animateMotion rotate="auto" dur="5s" repeatCount="indefinite">
+    <mpath href="#path"/>
+  </animateMotion>
+</rect>
+```
+![animateMotion6](./static/svg-animation/img/animateMotion6.svg)
+
+
+
+
+### 线条动画
+
+利用 path 的  `stroke-dasharray` 和 `stroke-dashoffset` 来实现线条运动。
+
+因为 dasharray 可以定义实线长度与间隙长度，并且 dashoffset 可以'移动'线段，所以可以通过改变这些属性的数值来实现动画效果
+|方式|起始值|终止值|
+|---|---|---|
+|1|stroke-dasharray: 0 max;|stroke-dasharray: max 0;|
+|2|stroke-dasharray: 0 max;|stroke-dasharray: max max;|
+|3|stroke-dashoffset: 0;<br/>stroke-dasharray: max max;|stroke-dashoffset: max;<br/>stroke-dasharray: max max;|
+*(max为path总长度)*
+
+还有一个问题，就是我们如何知道 path 图形的 stroke 有多长呢？
+
+噔噔！很简单，使用 path 元素的 `getTotalLength` 方法即可：
+
+```js
+document.getElementById('path').getTotalLength()
+```
+
+接下来我们做一条会动的线，首先，我们定义一条路径：
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250">
+  <path
+    class="move"
+    id="path"
+    ref="path"
+    fill="none"
+    d="M9,183.36C133.52,69,104.3,32.15,57.28,52.48s-36.85,82.59,44.47,130.87S142.42,79.17,222.46,37.24
+s174.08,160.1,168.99,170.26"
+    stroke="red">
+  </path>
+</svg>
+```
+
+然后定义动画样式：
+```css
+.move {
+  animation: move 3s linear infinite;
+}
+@keyframes move {
+  from {
+    stroke-dasharray: 0 857.92;
+  }
+  to {
+    stroke-dasharray: 857.92 0;
+  }
+}
+```
+这样就可以简单实现一个线条动画啦：[查看效果](./static/svg-animation/dome/demo.html)
+
+
+来看下详细的实现：
+
+[https://codesandbox.io/s/10x1m122o4](https://codesandbox.io/s/10x1m122o4)(外网)
+
+<iframe src="https://codesandbox.io/embed/ym78qx2vzv?module=%2Fsrc%2Fcomponents%2Fpath-attributes.vue" style="width:100%; height:700px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
