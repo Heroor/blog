@@ -1,5 +1,3 @@
-import MainContainer from '@/views/MainContainer.vue'
-
 export const _import = path => () =>
   import ('@/views/' + path)
 
