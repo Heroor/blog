@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     bannerInfo: {
       hideBanner: false,
-      bannerUrl: 'http://oueon55l6.bkt.clouddn.com/banner.jpg',
+      bannerUrl: 'http://cdn.benjavan.top/banner.jpg',
       bannerTitle: '',
       bannerDesc: ''
     },
