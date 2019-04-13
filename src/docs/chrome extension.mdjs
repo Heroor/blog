@@ -1,0 +1,401 @@
+{{
+    title: 'chrome extension',
+    poster: 'static/chrome_icon.png',
+    date: '2019-04-03',
+    id: '2019-04-03',
+    desc: '教你 chrome extension 入门'
+}}
+
+# chrome extension
+
+## 介绍
+Chrome Extension 是 Chrome 的扩展程序，也就是大家常说的「插件」。
+
+`扩展程序` 本质上其实是网页，开发者运用 web 技术，并基于 [Chrome Extension API](https://developers.chrome.com/extensions/api_index) 来增强 Chrome 的能力，实现诸如控制网络请求、自定义右键菜单、管理书签、在页面中插入 CSS 与 JavaScript、主题美化、定制主页等功能。
+
+[Chrome webstore](https://chrome.google.com/webstore/category/extensions) 上聚集了大量优秀的插件、主题、应用，你可以使用并且自己开发。
+
+Chrome Extension 一般有多种类型，大致有插件类、主题类、APP类：
+
+<img src="../../static/google-translate_icon.png" width="50"/>
+<img src="../../static/theme_icon.png" width="55"/>
+<img src="../../static/postman_icon.png" width="50"/>
+
+
+## 组成
+
+Chrome Extension 的几个重要组成部分:
+
+1. `manifest.json`  扩展程序的组成清单
+
+    `manifest.json` 这个文件定义了扩展程序的方方面面，就像你的身份证、户口本一样，这个我们等下介绍它
+
+2. `background script`  后台运行脚本
+
+    `background script` 可以在后台一直运行，用来监听各种事件、响应用户的操作
+
+3. `content script`  注入页面脚本
+
+    `content script` 可以将脚本注入进页面中，用来对页面进行修改
+
+4. `popup page`  侧边栏按钮弹窗
+
+    `popup page` 用来展示工具栏中图标按钮点击后出现的弹窗
+
+我们常见的主要功能就是这些啦
+
+
+### manifest.json
+
+`manifest.json` 是描述插件的清单文件，包含了扩展程序的大部分信息：
+
+```json
+{
+  "manifest_version": 2,  // 扩展标准
+  "name": "插件的名称",
+  "version": "0.0.1",
+  "description": "插件的描述",
+  "icons": {
+    "16": "imgs/icons-16.png",  // 扩展程序页面上的图标
+    "32": "imgs/icons-32.png",  // windows计算机通常需要此大小，防止失真
+    "48": "imgs/icons-48.png",  // 显示在扩站程序管理页面上
+    "128": "imgs/icons-128.png"  // 在安装和chrome webstore中显示
+  },
+  "background": {
+    "page": "background.html",
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "imgs/icon.png",
+    "default_title": "悬浮在工具栏插件图标时的tooltip内容",
+    "default_popup": "popup.html"  // 不允许内联 javascript
+  },
+  "content_scripts": [{
+    "js": ["inject.js"],
+    "matches": ["http://*/*", "https://*/*"],
+    "run_at": "document_start"
+  }],
+  "permissions": [
+    "contextMenus",
+    "tabs"
+  ],
+  "web_accessible_resources": ["dist/*", "dist/**/*"]
+}
+```
+
+- `manifest_version` 是扩展程序的清单文件格式的版本，从 `chrome18` 开始，都应指定为 `2`
+
+- `name` 就是这个扩展程序的名字
+
+- `version` 是当前发布的版本，每一次发布都应该更新版本
+
+- `description` 是对扩展程序的描述，这个描述会在 chrome 应用商店的扩展程序主页显示
+
+- `icons` 定义了在各个地方展示的图标
+
+- `background` 可以理解为后台运行的脚本，与浏览器打开的页面不存才关联
+
+- `browser_action` 定义了浏览器工具栏上的表现行为
+
+- `content_script` 是一个独立插入页面的脚本，可以获取 `window`、`DOM` 元素，并且不会与页面中的命名空间发生冲突
+
+- `permissions` chrome extension 提供了很多 `api`，在 `background` 中使用 `api` 需要事先定义
+
+- `web_accessible_resources` 可以授予访问其他资源的权限，比如你的 `css`、`js` 库
+
+
+## 开始我们的第一款插件
+
+我们创建一个文件夹 `my-plugin`，作为我们的项目。
+
+先在根目录创建一个 manifest.json 文件:
+
+```json
+{
+  "name": "my-plugin",
+  "version": "0.0.1",
+  "manifest_version": 2
+}
+```
+
+> Chrome 规定了一个 Chrome Extension 只允许包含一个 manifest.json 文件
+
+配置一个这样的清单文件就可以创建出一个扩展啦，就是这么简单粗暴。
+
+但是它现在什么功能都没有，什么都做不了，我们现在来加一些东西上去。
+
+首先，我们可以为插件添加一个 icon:
+
+```json
+{
+  "name": "my-plugin",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "icons": {
+    "16": "imgs/icon16.png",
+    "32": "imgs/icon32.png",
+    "48": "imgs/icon48.png",
+    "128": "imgs/icon128.png"
+  }
+}
+```
+
+你可以添加任何喜欢的图标，只需要配置 `icons` 选项即可。
+
+这里定义四种规格的图标，分别会作用在工具栏、插件管理页、插件商店等地方。
+
+一般扩展程序在浏览器上的表现分为两种：
+
+  1. `browser_action` 适用于任何页面的扩展 （例如 Google 翻译）
+  2. `page_action` 作用于某一页面的扩展（例如 Vue.js devtools）
+
+接下来我们创建一个常见的工具栏弹窗，在 `browser_action` 中定义:
+
+```json
+{
+  "name": "my-plugin",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "icons": {
+    "16": "imgs/icon16.png",
+    "32": "imgs/icon32.png",
+    "48": "imgs/icon48.png",
+    "128": "imgs/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "imgs/icon.png",
+    "default_title": "hello chrome",
+    "default_popup": "popup.html"
+  }
+}
+```
+
+我们现在设定插件作用于任何页面：使用 `browser_action` 选项，popup 需要指定一个 `html` 文件：
+
+```html
+<!-- popup.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>my-plugin</title>
+    <style>
+      body { width: 65px; }
+    </style>
+  </head>
+  <body>
+    <input class="btn"
+      type="button"
+      value="click me!">
+    <script src="popup.js"></script>
+  </body>
+</html>
+```
+
+在这里要注意：`popup html` 文件是不可以内联书写 `javscript` 的，也就是说只能使用 `script` 标签来引用外部的 `javascript` 脚本，所以我们还需定义一个 `popup.js`。
+
+```js
+// popup.js
+const btnEle = document.querySelector('.btn')
+btnEle.onclick = () => {
+  alert('hello chrome!')
+}
+```
+
+点击按钮弹出 `hello chrome!`，好了，我们迫不及待想要看看效果了！
+
+### 调试
+
+想要看到效果，我们需要把插件先装到 chrome 上：
+
+菜单中找到扩展程序入口：
+
+![install-chrome-plugin-1](/static/install-chrome-plugin-1.png)
+
+右上角开启开发者模式：
+
+![install-chrome-plugin-2](/static/install-chrome-plugin-2.png)
+
+点击 `加载已解压的扩展程序` 选择 `my-plugin` 项目：
+
+![install-chrome-plugin-3](/static/install-chrome-plugin-3.png)
+
+![install-chrome-plugin-4](/static/install-chrome-plugin-4.png)
+
+这样就添加到了插件管理页：
+
+![install-chrome-plugin-5](/static/install-chrome-plugin-5.png)
+
+
+这时浏览器工具栏就会出现刚刚添加的插件，图标时自定义的：
+
+![install-chrome-plugin-6](/static/install-chrome-plugin-6.png)
+
+点击插件图标，会显示 `popup.html` 页面：
+
+![install-chrome-plugin-7](/static/install-chrome-plugin-7.png)
+
+click me!
+
+![install-chrome-plugin-8](/static/install-chrome-plugin-8.png)
+
+
+### 与页面交互
+
+我们现在只能在页面外做动作，怎样与页面交互呢？
+
+前面说到 `content_script` 可以拿到浏览器当前打开页面的资源，这样我们就可以获取到 `window` 以及 `DOM`，并可以修改和插入 `html`、`css`、`js`。
+
+在 `manifest.json` 中配置 `content_script`：
+
+```json
+{
+  "name": "my-plugin",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "icons": {
+    "16": "imgs/icon16.png",
+    "32": "imgs/icon32.png",
+    "48": "imgs/icon48.png",
+    "128": "imgs/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "imgs/icon.png",
+    "default_title": "hello chrome",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [{
+    "js": ["inject.js"],
+    "matches": [
+      "http://*/*",
+      "https://*/*"
+    ]
+  }]
+}
+```
+
+- `js` 字段定义了需要加载的js脚本文件，这里是一个数组，所以脚本文件会按找数组顺序注入，如果我们的程序需要依赖于第三方库，就可以先注入他们。
+- `matches` 可以让你选择这些脚本在页面匹配到什么样的 `URI` 时被注入，以此来实现更复杂的功能。
+
+我们定义一个叫 `inject.js` 的文件，还是老套路，打印 `hello chrome` 或者你可以删掉某个 `DOM` 试试看：
+
+```js
+// inject.js
+alert('hello chrome')
+```
+
+此时随便打开一个 `http(s)://**/*` 页面时， chrome 就会帮我们注入 `inject.js` 到页面中并执行：
+
+![install-chrome-plugin-9](/static/install-chrome-plugin-9.png)
+
+随便打开一个页面，弹窗就出来了（不要这样做哦）。
+
+
+### 一个全局的后台脚本 background
+
+有些时候，我们在不同页面都需要出发一些事件、统一处理操作等，就需要一个全局的脚本在运行，这就是 `background script` 的作用。
+
+我们再来新建一个 `background.js` 并注册在 `manifest.json` 里：
+
+```js
+// background.js
+let timeout = 10000
+window.setTimeout(() => {
+  alert('hello chrome!')
+}, timeout)
+```
+
+```json
+{
+  "name": "my-plugin",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "icons": {
+    "16": "imgs/icon16.png",
+    "32": "imgs/icon32.png",
+    "48": "imgs/icon48.png",
+    "128": "imgs/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "imgs/icon.png",
+    "default_title": "hello chrome",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [{
+    "js": ["inject.js"],
+    "matches": [
+      "http://*/*",
+      "https://*/*"
+    ]
+  }],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  }
+}
+```
+
+- `scripts` 用来注入我们的 `background.js`。
+- `persistent` 字段为 `true` 时会持续在后台运行；`false`，会在事件触发时被才唤醒。
+
+这里写了一个定时器，每过 `10` 秒就会打印 `hello chrome!`。
+
+到这个时候，你可能会疑问：这些脚本之间如何通信？
+
+### 通信
+
+接下来我们看看怎么通信，我们在 `inject.js` 中发送消息，怎么样在 `background.js` 中收到？
+
+`chrome API` 中有一个 `sendMessage` 方法，可以发送消息，我们在 `inject.js` 这样写：
+
+```js
+// inject.js
+chrome.runtime.sendMessage(
+  message,
+  function (response) {
+    // do something...
+  }
+)
+```
+
+这样就能向 `background.js` 发送消息了，`sendMessage` 方法的第一个参数 `message` 为发送的消息内容（基础数据类型），第二个参数是一个回调函数，回调函数的第一个参数为 `background scripts` 接收消息后返回的消息（如果有的话）。
+
+接下来只需在 `background.js` 中接收消息了：
+
+```js
+// background.js
+chrome.runtime.onMessage.addListener(
+  function (request, sender, sendResponse) {
+    sendResponse(`It's ${request}!`)
+  }
+)
+```
+
+`addListener` 方法可以监听到发来的消息，第一个参数 `request` 表示发来消息的内容，第三个参数 `sendResponse` 是一个函数，用于对消息进行回应，如 `sendResponse('我已收到你的消息：'+JSON.stringify(request))`。
+
+
+### 发布
+
+当我们完成了插件所有的功能后，就可以发布插件啦~
+
+进入[chrome 扩展程序商店](https://chrome.google.com/webstore/category/extensions),右上角菜单中点击`开发者信息中心`，点击 `添加新内容`：
+
+![publish-chrome-plugin-1](/static/publish-chrome-plugin-1.png)
+
+上传插件的压缩文件：
+
+![publish-chrome-plugin-3](/static/publish-chrome-plugin-3.png)
+
+![publish-chrome-plugin-2](/static/publish-chrome-plugin-2.png)
+
+填写插件信息、上传预览图后，就可以发布更改了
+
+![publish-chrome-plugin-4](/static/publish-chrome-plugin-4.png)
+
+
+## 参考资料:
+
+1. https://welearnmore.gitbook.io/chrome-extension-book/
+2. https://juejin.im/post/5c135a275188257284143418#heading-10
+3. http://www.dahouduan.com/2017/08/12/make-chrome-extension/
