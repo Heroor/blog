@@ -367,7 +367,7 @@ chrome.runtime.sendMessage(
 // background.js
 chrome.runtime.onMessage.addListener(
   function (request, sender, sendResponse) {
-    sendResponse(`It's ${request}!`)
+    sendResponse("It's " + request)
   }
 )
 ```
