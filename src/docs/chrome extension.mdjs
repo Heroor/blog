@@ -5,9 +5,6 @@
     id: '2019-04-03',
     desc: '教你 chrome extension 入门'
 }}
-
-# chrome extension
-
 ## 介绍
 Chrome Extension 是 Chrome 的扩展程序，也就是大家常说的「插件」。
 

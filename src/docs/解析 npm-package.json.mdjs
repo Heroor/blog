@@ -5,9 +5,6 @@
   id: '2018-07-16',
   desc: 'npm-package.json 是描述一个 npm 项目的文件，它包含了很多字段，表示了项目的各种定义'
 }}
-
-# 解析 npm-package.json
-
 ## 前言
 
 `npm` 是 `nodejs` 的包管理工具，它让 `javascript` 开发者可以方便的分享、复用代码，并以强大的方式组装构建它们，这些可以重复引入的代码被称为 包（package）或模块（module），作为项目的依赖项独立存在。如今 `npm` 上已有 `700,000+` 个包，其中有很多优秀的、受开发者欢迎的包，例如 `lodash`、`webpack`、`react`、`express` 等，世界各地的 `javascript` 开发者都在使用 `npm` 或贡献代码，任何人都可以发布一个 `npm` 包。

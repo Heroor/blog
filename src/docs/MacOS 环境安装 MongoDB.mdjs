@@ -5,9 +5,7 @@
     id: '2018-07-06',
     desc: '在 MacOS 环境中安装 MongoDB'
 }}
-# MongoDB
-
-## Install in Mac
+## Install MongoDB in Mac
 
 1. 使用 [brew](https://brew.sh/) 安装
 
