@@ -1,5 +1,7 @@
 <script>
 import {articleList} from "@/service/mock.js"
+import types from '@/store/mutations'
+
 export default {
   name: 'ArticleDetail',
   props: {
@@ -23,6 +25,16 @@ export default {
   mounted() {
     const id = this.id
     articleList.some(v => v.id === id && (this.map = v))
+    this.toggleSideBar(true)
+  },
+  beforeRouteLeave (to, from, next) {
+    this.toggleSideBar(false)
+    next()
+  },
+  methods: {
+    toggleSideBar (isShow) {
+      this.$store.commit(types.SWITCH_SIDE_NAV, isShow)
+    }
   },
   render() {
     const { title, desc, poster, content, date } = this.map

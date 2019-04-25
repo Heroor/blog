@@ -13,7 +13,8 @@ export default new Vuex.Store({
       bannerDesc: ''
     },
     loadingProgress: 0,
-    loadingError: false
+    loadingError: false,
+    showSideNav: false,
   },
   mutations: {
     [types.SET_LOADING_PROGRESS] (state, val) {
@@ -21,6 +22,14 @@ export default new Vuex.Store({
     },
     [types.SET_LOADING_ERROR] (state, val) {
       state.loadingError = val
+    },
+    [types.SWITCH_SIDE_NAV] (state, val) {
+      console.log(val)
+      if (typeof val === 'boolean') {
+        state.showSideNav = val
+      } else {
+        state.showSideNav = !state.showSideNav
+      }
     }
   },
   actions: {
