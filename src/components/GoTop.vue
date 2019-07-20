@@ -28,13 +28,19 @@ export default {
   width 40px
   line-height 40px
   font-size 12px
+  font-weight bold
+  color #888
   border-radius 50%
   background #fff
-  box-shadow 0 0 8px rgba(0, 0, 0, .2)
+  box-shadow 0 0 8px rgba(35,180,226,0.2)
+  transition .2s
+  opacity .618
   cursor pointer
   z-index 1000
   &:hover
-    box-shadow 0 0 15px rgba(0, 0, 0, .2)
+    opacity .8
+    color #078bb5
+    box-shadow 0 0 12px rgba(35,180,226,0.5)
   &:active
-    box-shadow 0 0 8px rgba(0, 0, 0, .2)
+    box-shadow 0 0 8px rgba(35,180,226,0.2)
 </style>
