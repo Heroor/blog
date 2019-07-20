@@ -3,15 +3,14 @@ export default {
   functional: true,
   render() {
     return (
-      <div class="m-t--20">
-        <p class="footer__hosted">
-          <span>Hosted by </span>
-          <b><a class="footer__strong" href="https://pages.coding.me">Coding Pages</a></b>
-          <span> | Made by </span>
-          <a href="https://github.com/Heroor" target="_black">
-            <b class="footer__strong">Bener</b>
-          </a>
+      <div class="footer__wrap">
+        <p>
+          <span class="vertical-center">
+            Made by<a class="bener-link" href="https://github.com/Heroor" target="blank"><b> Bener </b></a>with
+            <span class="heart"> ❤ </span>
+          </span>
         </p>
+        <p>&copy; 2018-2019</p>
       </div>
     )
   }
@@ -20,14 +19,22 @@ export default {
 
 <style scoped lang="stylus">
 @import '../style/mix.styl';
-
-.footer__hosted {
-  line-height: 3;
-  text-align: center;
-  color: #999;
+.footer__wrap {
+  user-select none
+  margin 70px 0 30px
+  text-align center
+  font-size 13px
+  line-height 1.2
+  color #666
 }
-
-.footer__strong {
-  color: #587f8c;
+.bener-link {
+  color #555
+  transition .2s
+  &:hover {
+    color #078bb5
+  }
+}
+.heart {
+  color #F44336
 }
 </style>
