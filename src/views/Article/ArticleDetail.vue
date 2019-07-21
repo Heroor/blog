@@ -1,5 +1,5 @@
 <script>
-import {articleList} from "@/service/mock.js"
+import { articleList } from "@/service/mock.js"
 import types from '@/store/mutations'
 
 export default {
@@ -12,7 +12,7 @@ export default {
   },
   data() {
     return {
-      map: {
+      detail: {
         title: "",
         desc: "",
         poster: "",
@@ -24,22 +24,22 @@ export default {
   },
   mounted() {
     const id = this.id
-    articleList.some(v => v.id === id && (this.map = v))
+    articleList.some(v => v.id === id && (this.detail = v))
     this.toggleSideBar(true)
   },
-  beforeRouteLeave (to, from, next) {
+  beforeDestroy() {
     this.toggleSideBar(false)
-    next()
   },
   methods: {
-    toggleSideBar (isShow) {
+    toggleSideBar(isShow) {
       this.$store.commit(types.SWITCH_SIDE_NAV, isShow)
-    }
+    },
   },
   render() {
-    const { title, desc, poster, content, date } = this.map
-    this.$refs.contentContainer &&
-      (this.$refs.contentContainer.innerHTML = content || "")
+    const { title, desc, poster, content, date } = this.detail
+    this.$refs.contentContainer && (this.$refs.contentContainer.innerHTML = content || "")
+    content.length && this.$emit('content-render', content)
+
     return (
       <div class="detail__wrap">
         <h1 class="title text--c w-b--word">{title}</h1>

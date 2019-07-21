@@ -50,7 +50,7 @@ export default new Vuex.Store({
 
 function genSwitchStatusFn (stateKey) {
   return function switchStatus (state, val) {
-    console.log(val)
+    // console.log(val)
     if (typeof val === 'boolean') {
       state[stateKey] = val
     } else {

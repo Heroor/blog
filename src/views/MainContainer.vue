@@ -2,8 +2,11 @@
   <div class="main__wrap">
     <div class="sidebar__wrap" v-if="showSideBar">
       <div class="sidebar__container" :class="{fixed: isSideBarFixed}">
+        <div>
+          <img width="100%" src="http://cdn.benjavan.top/banner.jpg" alt="banner">
+        </div>
         <transition name="fade" mode="out-in">
-          <sideNav v-show="showSideNav"/>
+          <sideNav v-show="showSideNav" :md="content"/>
         </transition>
       </div>
     </div>
@@ -11,6 +14,7 @@
     <transition name="slide-up" mode="out-in">
       <div class="main__container">
         <router-view ref="container"
+          @content-render="onContentRender"
           @hook:mounted="onContainerMounted"
           @hook:destroyed="onContainerDestroyed"/>
       </div>
@@ -29,6 +33,7 @@ export default {
     return {
       pageScrollTop: 0,
       fixedOffsetTop: 0,
+      content: '',
     }
   },
   computed: {
@@ -38,12 +43,15 @@ export default {
     }
   },
   methods: {
+    onContentRender (content) {
+      this.content = content
+    },
     updatePageScrollTop (e) {
       this.pageScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
     },
     initSideBarPosi () {
       this.updatePageScrollTop()
-      this.fixedOffsetTop = (this.$refs.container && this.$refs.container.$el.offsetTop - 25) || 0
+      this.fixedOffsetTop = (this.$refs.container && this.$refs.container.$el.offsetTop - 15) || 0
     },
     onContainerMounted () {
       this.initSideBarPosi()
@@ -95,7 +103,7 @@ export default {
   transition .2s
   &.fixed
     position fixed
-    top 25px
+    top 15px
 </style>
 
 <style lang="stylus">
