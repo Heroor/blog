@@ -14,6 +14,7 @@ export default new Vuex.Store({
     },
     loadingProgress: 0,
     loadingError: false,
+    showSideBar: false,
     showSideNav: false,
   },
   mutations: {
@@ -23,14 +24,8 @@ export default new Vuex.Store({
     [types.SET_LOADING_ERROR] (state, val) {
       state.loadingError = val
     },
-    [types.SWITCH_SIDE_NAV] (state, val) {
-      console.log(val)
-      if (typeof val === 'boolean') {
-        state.showSideNav = val
-      } else {
-        state.showSideNav = !state.showSideNav
-      }
-    }
+    [types.SWITCH_SIDE_BAR]: genSwitchStatusFn('showSideBar'),
+    [types.SWITCH_SIDE_NAV]: genSwitchStatusFn('showSideNav'),
   },
   actions: {
     beginLoading ({ commit, state }) {
@@ -52,3 +47,14 @@ export default new Vuex.Store({
     }
   }
 })
+
+function genSwitchStatusFn (stateKey) {
+  return function switchStatus (state, val) {
+    console.log(val)
+    if (typeof val === 'boolean') {
+      state[stateKey] = val
+    } else {
+      state[stateKey] = !state[stateKey]
+    }
+  }
+}

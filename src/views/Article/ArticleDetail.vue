@@ -56,8 +56,10 @@ export default {
 <style src="@/style/hljs.css"></style>
 <style scoped lang="stylus">
 @import '../../style/mix.styl'
-
 .detail__wrap
+  flex 1
+  max-width $main-width
+  min-width 100px
   min-height 200px
   padding 20px 40px
   border-radius 6px

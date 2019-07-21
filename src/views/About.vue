@@ -14,7 +14,10 @@ export default {
 }
 </script>
 <style scoped lang="stylus">
+@import '../style/mix.styl'
 .info-container
+  flex 1
+  max-width $main-width
   min-height 300px
   padding 40px
   margin 0 10px
@@ -27,4 +30,5 @@ export default {
   .info-container
     padding 20px
     margin 0
+    border-radius 0
 </style>

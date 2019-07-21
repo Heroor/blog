@@ -16,3 +16,9 @@ export default {
   }
 }
 </script>
+
+<style scopde lang="stylus">
+.header-wrap
+  @media screen and (max-width 640px)
+    margin-bottom -20px
+</style>
