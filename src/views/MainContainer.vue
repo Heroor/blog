@@ -1,5 +1,5 @@
 <template>
-  <div class="main__container">
+  <div class="main__wrap">
     <div class="sidebar__wrap" v-if="showSideBar">
       <div class="sidebar__container" :class="{fixed: isSideBarFixed}">
         <transition name="fade" mode="out-in">
@@ -9,9 +9,11 @@
     </div>
 
     <transition name="slide-up" mode="out-in">
-      <router-view ref="container"
-        @hook:mounted="onContainerMounted"
-        @hook:destroyed="onContainerDestroyed"/>
+      <div class="main__container">
+        <router-view ref="container"
+          @hook:mounted="onContainerMounted"
+          @hook:destroyed="onContainerDestroyed"/>
+      </div>
     </transition>
   </div>
 </template>
@@ -66,10 +68,17 @@ export default {
 
 <style scoped lang="stylus">
 @import '../style/mix.styl';
-.main__container
+.main__wrap
   display flex
   justify-content center
   align-items start
+
+.main__container
+  flex 1
+  max-width $main-width
+  margin 0 10px
+  @media screen and (max-width 640px)
+    margin 0
 
 .sidebar__wrap
   width $side-bar-width
