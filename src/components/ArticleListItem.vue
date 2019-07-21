@@ -8,7 +8,7 @@ export default {
     }
   },
   render (h, {props: {itemData}}) {
-    const {id, title, poster, desc, date, } = itemData
+    const {id, title, poster, desc, date, wordCount } = itemData
     return (
       <li class="article-item">
         <div class="article__content">
@@ -30,7 +30,10 @@ export default {
               </div>
             )}
             <p class="article__desc w-b--word w-b--all">{desc}</p>
-            <span class="article__date">{date}</span>
+            <div>
+              <span class="article__date m-r--10">{date}</span>
+              <span class="article__date">{wordCount}字</span>
+            </div>
           </div>
           {poster && (
             <div class="article__right">
@@ -65,7 +68,6 @@ export default {
       flex-direction column
       transition(.4s)
     &__title
-      display inline-block
       margin-bottom 20px
       font-weight bold
       font-size $font-title
@@ -104,6 +106,8 @@ export default {
     .article
       &-item
         padding 22px 20px 20px
+        margin-bottom 24px !important
+        border-radius 0
       &__content
         flex-wrap wrap
         flex-direction column-reverse

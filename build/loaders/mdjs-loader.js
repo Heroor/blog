@@ -27,5 +27,9 @@ module.exports = function (markdown) {
   markdown = markdown.replace(reg, '')
   info = (infoMatch && infoMatch[1].trim()) || "{title: '未知'}"
 
-  return "module.exports = {info: " + info + ", content: `" + md.render(markdown) + "`}";
+  return `module.exports = {
+    info: ${info},
+    content: \`${md.render(markdown)}\`,
+    wordCount: ${markdown.length}
+  }`;
 }
