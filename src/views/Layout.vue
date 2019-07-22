@@ -1,11 +1,11 @@
 <template>
   <div class="layout">
-    <LoadingBar
+    <!-- <LoadingBar
       :on-error-done="errorDone"
       :on-progress-done="progressDone"
       :progress="progress"
       :error="error"
-    />
+    /> -->
     <Header />
     <Container />
     <Footer />

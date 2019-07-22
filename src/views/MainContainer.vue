@@ -102,6 +102,8 @@ export default {
     display none
 
 .sidebar__container
+  display flex
+  flex-direction column
   width $side-bar-width
   padding 15px
   border-radius 4px
@@ -110,6 +112,7 @@ export default {
   &.fixed
     position fixed
     top 15px
+    max-height calc(100vh - 30px)
 </style>
 
 <style lang="stylus">

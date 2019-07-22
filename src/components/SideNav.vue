@@ -6,12 +6,29 @@ export default {
       default: () => ({})
     }
   },
+  data () {
+    return {
+      currentLink: '',
+      currentId: '',
+      id: '',
+    }
+  },
   computed: {
     navList() {
       return this.parseNav(this.el)
     }
   },
   methods: {
+    hasHashChange () {
+      const url = window.location.href
+      const sharpLinkMatch = /#([^#]+)$/.exec(url)
+      if (!sharpLinkMatch) return
+      this.currentLink = sharpLinkMatch[0]
+      this.currentId = window.decodeURI(sharpLinkMatch[1])
+
+      console.log(this.currentId)
+      console.log(this.currentLink)
+    },
     parseNav(contentEle) {
       if (contentEle instanceof Element) {
         const navList = [...contentEle.querySelectorAll('h1, h2, h3, h4')]
@@ -23,21 +40,22 @@ export default {
       }
       return []
     },
-    anchorTo (e, content) {
-      console.log('turn to ', content, e)
+    anchorTo (e, content, id) {
+      this.id = id
     }
   },
   render() {
     return (
-      <div>
-        <ul class="sidebar__wrap">
+      <div class="side-nav__wrap">
+        <ul class="side-nav__container">
           {
             this.navList.map((ele, i) => (
               <li class={ele.tagName.toLowerCase()} key={i}>
                 <a data-id={i}
+                  class={i === this.id ? 'current' : ''}
                   title={ele.textContent}
                   href={`#${ele.textContent}-${i}`}
-                  onClick={e => this.anchorTo(e, ele.textContent)}>
+                  onClick={e => this.anchorTo(e, ele.textContent, i)}>
                   {ele.textContent}
                 </a>
               </li>
@@ -51,8 +69,10 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.sidebar__wrap
+.side-nav__wrap
+  flex 1
   overflow auto
+.side-nav__container
   list-style none
   margin 10px 0
   li
@@ -65,6 +85,8 @@ export default {
       text-decoration none
       color #383838
       cursor pointer
+      &.current
+        color: #078bb5
       &:hover
         color #078bb5
   .h1
