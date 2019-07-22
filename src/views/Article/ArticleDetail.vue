@@ -1,3 +1,12 @@
+<template>
+  <div class="detail__wrap">
+    <h1 class="title text--c w-b--word">{{detail.title}}</h1>
+    <!-- <p class="desc">{desc}</p> -->
+    <div v-html="'<h1>Loading...</h1>'" ref="contentContainer" class="content md" />
+    <div class="date m-t--50">{{detail.date}}</div>
+  </div>
+</template>
+
 <script>
 import { articleList } from "@/service/mock.js"
 import types from '@/store/mutations'
@@ -22,33 +31,30 @@ export default {
       }
     }
   },
-  mounted() {
-    const id = this.id
-    articleList.some(v => v.id === id && (this.detail = v))
-    this.toggleSideBar(true)
-  },
-  beforeDestroy() {
-    this.toggleSideBar(false)
-  },
   methods: {
     toggleSideBar(isShow) {
       this.$store.commit(types.SWITCH_SIDE_NAV, isShow)
     },
   },
-  render() {
-    const { title, desc, poster, content, date } = this.detail
-    this.$refs.contentContainer && (this.$refs.contentContainer.innerHTML = content || "")
-    content.length && this.$emit('content-render', content)
+  mounted() {
+    const id = this.id
+    this.mock(articleList.find(v => v.id === id))
+      .then(res => {
+        Object.assign(this.detail, res)
 
-    return (
-      <div class="detail__wrap">
-        <h1 class="title text--c w-b--word">{title}</h1>
-        {/*<p class="desc">{desc}</p>*/}
-        <div ref="contentContainer" class="content md" />
-        <div class="date m-t--50">{date}</div>
-      </div>
-    )
-  }
+        const contentHtml = this.detail.content
+        const containerEle = this.$refs.contentContainer
+        if (contentHtml && containerEle) {
+          containerEle.innerHTML = contentHtml || ''
+
+          this.$emit('content-render', containerEle)
+          this.toggleSideBar(true)
+        }
+      })
+  },
+  beforeDestroy() {
+    this.toggleSideBar(false)
+  },
 }
 </script>
 

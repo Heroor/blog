@@ -1,12 +1,12 @@
 <template>
   <div class="main__wrap">
-    <div class="sidebar__wrap" v-if="showSideBar">
+    <div v-if="showSideBar" class="sidebar__wrap" :class="{right: isSideBarRight}">
       <div class="sidebar__container" :class="{fixed: isSideBarFixed}">
         <div>
           <img width="100%" src="http://cdn.benjavan.top/banner.jpg" alt="banner">
         </div>
         <transition name="fade" mode="out-in">
-          <sideNav v-show="showSideNav" :md="content"/>
+          <sideNav v-show="showSideNav" :el="contentEle"/>
         </transition>
       </div>
     </div>
@@ -33,7 +33,8 @@ export default {
     return {
       pageScrollTop: 0,
       fixedOffsetTop: 0,
-      content: '',
+      contentEle: {},
+      isSideBarRight: false,
     }
   },
   computed: {
@@ -43,8 +44,8 @@ export default {
     }
   },
   methods: {
-    onContentRender (content) {
-      this.content = content
+    onContentRender (contentEle) {
+      this.contentEle = contentEle
     },
     updatePageScrollTop (e) {
       this.pageScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
@@ -84,6 +85,7 @@ export default {
 .main__container
   flex 1
   max-width $main-width
+  min-width 100px
   margin 0 10px
   @media screen and (max-width 640px)
     margin 0
@@ -92,6 +94,10 @@ export default {
   width $side-bar-width
   margin-right 5px
   margin-left 10px
+  &.right
+    order 1
+    margin-right 10px
+    margin-left 5px
   @media screen and (max-width 990px)
     display none
 

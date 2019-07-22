@@ -4,10 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from '@/store'
+import { vmock } from './plugins/index'
 // import VConsole from 'vconsole'
 
 process.env.NODE_ENV === 'development' //&& new VConsole()
 
+Vue.use(vmock)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

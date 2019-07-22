@@ -1,26 +1,27 @@
 <script>
 export default {
   props: {
-    md: {
-      type: String,
-      default: ''
-    }
-  },
-  data() {
-    return {
-      // navList: []
+    el: {
+      type: [Object, HTMLDivElement],
+      default: () => ({})
     }
   },
   computed: {
     navList() {
-      return this.parseNav(this.md)
+      return this.parseNav(this.el)
     }
   },
   methods: {
-    parseNav(innerHTML) {
-      const contentEle = document.createElement('div')
-      contentEle.innerHTML = innerHTML
-      return [...contentEle.querySelectorAll('h1, h2, h3, h4')]
+    parseNav(contentEle) {
+      if (contentEle instanceof Element) {
+        const navList = [...contentEle.querySelectorAll('h1, h2, h3, h4')]
+        navList.forEach((ele, i) => {
+          ele.id = `${ele.textContent}-${i}`
+          ele.dataset.index = i
+        })
+        return navList
+      }
+      return []
     },
     anchorTo (e, content) {
       console.log('turn to ', content, e)
@@ -35,6 +36,7 @@ export default {
               <li class={ele.tagName.toLowerCase()} key={i}>
                 <a data-id={i}
                   title={ele.textContent}
+                  href={`#${ele.textContent}-${i}`}
                   onClick={e => this.anchorTo(e, ele.textContent)}>
                   {ele.textContent}
                 </a>
