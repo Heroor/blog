@@ -8,6 +8,7 @@ import {_import} from './config'
 Vue.use(Router)
 
 const router = new Router({
+  mode: 'history',
   routes: [{
     path: '/',
     component: Layout,
