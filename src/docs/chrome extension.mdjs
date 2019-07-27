@@ -14,9 +14,9 @@ Chrome Extension 是 Chrome 的扩展程序，也就是大家常说的「插件�
 
 Chrome Extension 一般有多种类型，大致有插件类、主题类、APP类：
 
-<img src="../../static/google-translate_icon.png" width="50"/>
-<img src="../../static/theme_icon.png" width="55"/>
-<img src="../../static/postman_icon.png" width="50"/>
+<img src="/static/google-translate_icon.png" width="50"/>
+<img src="/static/theme_icon.png" width="55"/>
+<img src="/static/postman_icon.png" width="50"/>
 
 
 ## 组成

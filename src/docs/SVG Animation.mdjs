@@ -15,11 +15,11 @@
 
 栅格图形又称为位图或点阵图，使用像素阵列表示图像，比如 png，jpg，gif 等图片格式都是栅格图形，每个像素都有特定的位置与颜色值，可以表示的颜色由每个像素的携带的色值决定，像素与颜色信息越多，图片储存空间就越大
 
-![demo1](./static/svg-animation/img/demo1.jpg)
+![demo1](/static/svg-animation/img/demo1.jpg)
 
 一般浏览器使用的都是栅格图形，但是它也有缺点，就是当小的图形被放大显示时，图形边缘会产生锯齿，使得显示效果失真，例如这样：
 
-![demo2](./static/svg-animation/img/demo2.png)
+![demo2](/static/svg-animation/img/demo2.png)
 
 
 
@@ -29,7 +29,7 @@
 
 因为矢量图形是根据坐标绘制的，所以与分辨率无关，放大与缩小都不会丢失细节，曲线的边缘更加平滑，不影响清晰度，且保存体积比栅格图形小
 
-![download](./static/svg-animation/img/tool.svg)![star](./static/svg-animation/img/star.svg)![tree](./static/svg-animation/img/tree.svg)
+![download](/static/svg-animation/img/tool.svg)![star](/static/svg-animation/img/star.svg)![tree](/static/svg-animation/img/tree.svg)
 
 
 
@@ -121,7 +121,7 @@ stroke-width: 边框的宽度
 </rect>
 ```
 
-![rect](./static/svg-animation/img/rect.svg)
+![rect](/static/svg-animation/img/rect.svg)
 
 
 
@@ -150,14 +150,14 @@ cy: 圆心在 y 轴上的坐标
 </circle>
 ```
 
-![circle](./static/svg-animation/img/circle.svg)
+![circle](/static/svg-animation/img/circle.svg)
 
 #### ellipse 椭圆
 
 椭圆与圆最大的区别是：圆拥有一个半径，椭圆有两个半径
 椭圆具有两个轴上的半径，x 轴的 `rx`，y 轴的 `ry`
 
-![椭圆](./static/svg-animation/img/ellipse.gif)
+![椭圆](/static/svg-animation/img/ellipse.gif)
 
 属性：
 cx: 圆心在 x 轴的坐标
@@ -179,7 +179,7 @@ stroke-width: 边框的宽度
 >
 </ellipse>
 ```
-![ellipse](./static/svg-animation/img/ellipse.svg)
+![ellipse](/static/svg-animation/img/ellipse.svg)
 
 ***当 rx 和 ry 相等时，绘制出的 `<ellipse>` 和 `<circle>` 是相等的***
 
@@ -204,7 +204,7 @@ stroke: 边框的颜色
 stroke-width: 边框的宽度
 *多边形最少由三个点组成*
 
-![polygon](./static/svg-animation/img/polygon.svg)
+![polygon](/static/svg-animation/img/polygon.svg)
 
 
 
@@ -230,7 +230,7 @@ stroke-width: 直线的宽度
 </line>
 ```
 
-![line](./static/svg-animation/img/line.svg)
+![line](/static/svg-animation/img/line.svg)
 
 
 
@@ -251,7 +251,7 @@ stroke-width: 折线的宽度
 </polyline>
 ```
 
-![polyline](./static/svg-animation/img/polyline.svg)
+![polyline](/static/svg-animation/img/polyline.svg)
 
 
 
@@ -269,7 +269,7 @@ stroke-dasharray：它是一个 `<length>` 和 `<percentage>` 数列，数与数
 
 stroke-dashoffset：标识 dash 的起始位置
 
-![stroke-dasharray](./static/svg-animation/img/stroke-dasharray.png)
+![stroke-dasharray](/static/svg-animation/img/stroke-dasharray.png)
 
 d：路径命令的集合，包含多个指令：
 
@@ -297,7 +297,7 @@ d：路径命令的集合，包含多个指令：
 </path>
 ```
 
-![path](./static/svg-animation/img/path.svg)
+![path](/static/svg-animation/img/path.svg)
 
 
 
@@ -424,7 +424,7 @@ repeatCount：动画重复的次数。indefinite：无限反复
   ></animate>
 </rect>
 ```
-![animate](./static/svg-animation/img/animate.svg)
+![animate](/static/svg-animation/img/animate.svg)
 
 
 
@@ -449,7 +449,7 @@ type：定义了动画 `transform` 的类型
     repeatCount="indefinite" />
 </polygon>
 ```
-![animateTransform](./static/svg-animation/img/animateTransform.svg)
+![animateTransform](/static/svg-animation/img/animateTransform.svg)
 
 
 
@@ -484,7 +484,7 @@ rotate：旋转角度。 auto：让物体垂直于路径的切线方向运动；
 </rect>
 ```
 
-![animateMotion1](./static/svg-animation/img/animateMotion1.svg) ![animateMotion2](./static/svg-animation/img/animateMotion2.svg)
+![animateMotion1](/static/svg-animation/img/animateMotion1.svg) ![animateMotion2](/static/svg-animation/img/animateMotion2.svg)
 
 
 
@@ -500,7 +500,7 @@ rotate：旋转角度。 auto：让物体垂直于路径的切线方向运动；
 </rect>
 ```
 
-![animateMotion3](./static/svg-animation/img/animateMotion3.svg)
+![animateMotion3](/static/svg-animation/img/animateMotion3.svg)
 
 也可以使用 `<mpath>` 标签来引用 `<path>` 的路径：
 
@@ -517,7 +517,7 @@ rotate：旋转角度。 auto：让物体垂直于路径的切线方向运动；
   </animateMotion>
 </circle>
 ```
-![animateMotion4](./static/svg-animation/img/animateMotion4.svg)
+![animateMotion4](/static/svg-animation/img/animateMotion4.svg)
 
 修改 rotate 属性：
 
@@ -535,7 +535,7 @@ rotate：旋转角度。 auto：让物体垂直于路径的切线方向运动；
   </animateMotion>
 </rect>
 ```
-![animateMotion5](./static/svg-animation/img/animateMotion5.svg)
+![animateMotion5](/static/svg-animation/img/animateMotion5.svg)
 
 `auto`
 ```xml
@@ -551,7 +551,7 @@ rotate：旋转角度。 auto：让物体垂直于路径的切线方向运动；
   </animateMotion>
 </rect>
 ```
-![animateMotion6](./static/svg-animation/img/animateMotion6.svg)
+![animateMotion6](/static/svg-animation/img/animateMotion6.svg)
 
 
 
@@ -605,7 +605,7 @@ s174.08,160.1,168.99,170.26"
   }
 }
 ```
-这样就可以简单实现一个线条动画啦：[查看效果](./static/svg-animation/dome/demo.html)
+这样就可以简单实现一个线条动画啦：[查看效果](/static/svg-animation/dome/demo.html)
 
 
 来看下详细的实现：

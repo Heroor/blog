@@ -1,6 +1,6 @@
 {{
   title: '解析 npm-package.json',
-  poster: 'static/npm.png',
+  poster: '/static/npm.png',
   date: '2018-07-16',
   id: '2018-07-16',
   desc: 'npm-package.json 是描述一个 npm 项目的文件，它包含了很多字段，表示了项目的各种定义'

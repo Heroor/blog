@@ -1,6 +1,6 @@
 {{
   title: '对 javascript 执行环境的探索',
-  poster: 'static/poster.png',
+  poster: '/static/poster.png',
   date: '2018-06-08',
   id: '2018-06-08',
   desc: '执行上下文 执行环境 作用域 作用域链 函数调用栈 执行队列 执行上下文队列 变量对象 活动对象 解析器interpreter 声明declared'
