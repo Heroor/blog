@@ -1,0 +1,943 @@
+{{
+  title: 'Linux学习笔记',
+  poster: '',
+  date: '2020-03-07',
+  id: '2020-03-07',
+  desc: '学习linux的常用命令，文件系统，权限系统，软件安装，远程登录等知识'
+}}
+# linux-note
+
+## 命令
+
+### 关于参数
+
+参数常常跟在命令后面，用于改变命令的行为
+
+1. 短参数
+`-p`  短参数 一个连字符与一个字母
+`-p -a` 多个短参数
+`-pasf` 多个短参数可以合并在一起
+`-p 10`  短参数传递值
+2. 长参数
+`—para` 长参数 两个连字符与多个字母
+*多个长参数不可合并*
+`—para=10` 长参数传递值
+
+
+
+- `<xxx>` 必填内容
+- `[xxx]` 选填内容
+- `<xxx|xxx>` 至少选择一项
+- `[xxx]...` 可多次重复
+
+
+
+- `&&` 前面命令成功，才执行后面命令
+- `||` 前面命令失败，才执行后面命令
+- `;` 执行完前面命令就执行后面命令
+
+
+
+### 常用命令
+
+`whoami` 显示当前用户
+
+`hostname` 显示主机名
+
+`date` 显示日期
+
+`history` 历史运行过的命令
+
+`clear` 清屏
+
+`exit` 退出终端或当前账户
+
+`pwd` 显示当前工作目录 `print working directory`
+
+`which` 显示一个命令的对应可执行文件的路径
+
+- `which pwd`
+
+
+
+### 文件操作
+
+#### 基本命令
+
+`ls` 列举目录下的文件和目录 *`list`*
+
+- `ls` 列举当前目录
+- `ls dir` 列举 `dir` 目录
+- `-a` 显示全部文件、目录，包括隐藏文件、目录 (all)。以 `.` 开头的是隐藏文件或目录：`.git`
+- `-l` 显示详细信息的列表
+- `-t` 按最近修改时间排序
+- `-h` 以便于阅读的方式展示
+- `-i` 显示文件的 *`inode`*
+
+
+
+`cd` 切换目录 *`change directory`*
+
+- `cd /` 跳转至根目录
+- `cd ../` 跳转至上级目录
+
+
+
+`du` 统计j目录的大小，他会向下遍历每一层目录 *`disk usage`*
+
+- `du` 显示当前目录的大小
+
+- `du test.txt`  显示 `test.txt` 文件的大小
+- `du -a` 统计目录以及文件的大小
+- `du -s` 至显示总计大小
+
+
+
+`cat` 显示文件内容，显示文件所有内容
+
+- `cat -n test.txt` 显示行号
+- `cat 1.txt 2.txt`  显示多个文件内容
+
+
+
+`less` 读取部分文件内容
+
+浏览模式下的快捷键：
+
+- `d` 前进半页
+- `b` 后退一页
+- `y` 后退一行
+- `u` 后退半页
+- `q` 停止读取
+- `=` 显示当前在文件中什么位置
+- `/` 搜索内容
+- `n` 显示下一个搜索匹配结果
+- `N` 显示上一个搜索匹配结果
+
+
+
+`head` 显示文件开头
+
+- `-n` 显示行号
+
+
+
+`tail` 显示文件结尾
+
+- `-n` 显示行号
+- `-f` 实时显示文件追加的内容
+- `-s` 指定检查文件更新的频率 默认为1秒
+
+
+
+`touch` 修改文件的创建时间或修改时间；如果文件不存在，就会创建这个文件，所以可以用这个命令来创建文件
+
+- `touch newfile` 创建 `newfile`  文件
+- `touch file1 file2` 同时创建多个文件
+
+- `touch "new file"` 创建文件名带空格的文件，需要使用双引号
+
+
+
+`mkdir` 创建目录
+
+- `mkdir newfloder` 创建 `newfloder`  目录
+- `mkdir floder1 floder2` 同时创建多个目录
+
+- `mkdir "new floder"` 创建目录名带空格的目录，需要使用双引号
+- `-p` 递归创建目录结构 `mkdir a/b/c`
+
+
+
+`cp` 拷贝文件或目录
+
+- `cp file1 file2` 复制 `file1` 为 `file2`
+- `cp file floder` 拷贝 `file` 至 `floder` 目录下
+- `-r` 递归拷贝，也就是拷贝目录
+- `cp *.img images` 将当前目录下所有以 `.img` 结尾的文件拷贝到 `images` 目录
+- `cp icon-* images` 将当前目录下所有以 `icon-` 开头的文件拷贝到 `images` 目录
+
+
+
+`mv` 移动文件或目录
+
+- `mv file floder/` 将文件 `file` 移动至 `floder/` 目录下
+- `mv file1 file2`  将 `file1` 重命名为 `file2`
+
+
+
+`rm` 删除文件或目录
+
+- `rm file` 删除当前目录下的 `file` 文件
+- `rm fil1 fil2` 同时删除多个文件
+- `-i` 询问是否删除
+-  `-f` 强制删除，不会询问
+- `-r` 递归删除
+
+
+
+`rmdir` 删除空目录
+
+
+
+`ln` 创建链接 *`link`*
+
+> linux链接分为 硬链接 和 软连接 两种
+>
+> 硬链接：（一般只能创建文件的硬链接）不同的文件名指向相同的文件内容 `inode` ，当修改一个文件时，也是在修改另一个文件；删除其中一个文件，不会对其他文件造成影响
+>
+> 软连接：（可以指向文件或目录）创建一个文件，指向某文件的文件名，相当于快捷方式；删除软链接，源文件不收影响，但是删除源文件，软链接会失效
+
+- `ln file1 file2` 创建 `file1` 的硬链接 `file2`
+- `-s` 创建软链接 symbolic
+- `ln -s file1 file2` 创建 `file1`  的软链接 `file2`
+
+
+
+`find` 查找命令
+
+- `find [path] <file-name> [action]` 可指定路径下查找文件，还可以指定查找后的动作
+
+- `find -name <file-name>` 在当前目录下查找所有符合 `file-name` 的文件或目录
+
+- `find /home -name file` 在 `/home` 目录下查找 `file` 文件
+
+- `find pre*` 当前目录下查找所有以 `pre` 开头的文件或目录
+
+- `find *.txt` 当前目录下查找所有以 `.txt` 结尾的文件或目录
+
+
+
+- `-size` 指定大小查找
+
+  -  `-size -20M` 小于 `20M` 的文件
+  - `-size 1G` 等于 `1G` 的文件
+
+- `-atime` 按访问时间查找 *`access time`*
+
+  - `-atime 10` 最近10天
+  - `-atime -10` 10天之内
+
+- `-type` 文件类型
+
+  - `-type d` 查找的目标是目录
+  - `-type f` 查找的目标是文件
+
+- `-printf` 格式化打印结果
+
+  - `-printf "%p - %u/n"` 按格式打印查找的结果
+  - `%p` 文件名
+  - `%u` 用户名
+
+- `-delete` 删除查找到的文件
+
+- `-exec` 对结果文件执行命令，命令以 `\;` 结尾
+
+  - `-exec cp {} ./result \;` 将匹配到的每个文件（用 `{}` 表示）复制到 `./result` 目录
+
+- `-ok` 与 `-exec` 用法一致，但是会在执行命令前让用户确认
+
+
+
+`grep` 全局搜索正则表达式并打印
+
+- `grep <word> <file>` 在文件中搜索
+- `-i` 忽略大小写
+- `-n` 显示行号
+- `-v` 只显示文本不在的行
+- `-r` 在目录中递归查找
+- `-E` 使用正则表达式搜索
+
+
+
+`wc` 文件统计 *`word count`*
+
+- `wc file` 打印行数、单词数，字节数
+- `-l` 统计行数
+- `-w` 统计单词数
+- `-c` 统计字节数
+- `-m` 统计字符数
+
+
+
+#### 压缩
+
+`tar` 将多个文件归并成归档
+
+- `-c` 创建 *`create`*
+- `-v` 显示过程
+- `-f` 指定文件 *`file`*
+- `-t`  *`list`*
+- `-x` 解开归档
+- `-z` 压缩文件
+- `tar -cvf file.tar file` 将 `file` 文件归档
+- `tar -zcvf file.tar.gz file` 将文件归档并压缩
+- `tar -tf file.tar` 显示归档内容而不解开归档
+- `tar -rvf file.tar file` 追加文件 `file` 到归档 `file.tar`
+- `tar -xvf file.tar` 解开归档
+- `tar -zxvf file.tar.gz` 解压并解开归档
+
+
+
+`gzip` 压缩文件
+
+- `gzip file.tar` 压缩一个归档
+
+`gunzip` 解压文件
+
+- `gunzip file.tar.gz` 解压文件
+
+
+
+`zip` 压缩成 `zip` 文件
+
+- `zip file.zip file` 压缩 `file` 文件为 `file.zip`
+- `zip -r dir.zip ./dir/` 递归压缩目录
+
+`unzip` 解压文件
+
+- `unzip file.zip` 解压文件
+- `unzip -l file.zip` 不解压只查看内容
+
+
+
+`wget` 下载器
+
+- `wget xxxxxx` 下载一个链接的文件
+
+
+
+#### 流、管道、重定向
+
+linux中的数据可以通过命令输出到屏幕上，也可以保存在文件中，甚至作为另一个命令的输入，这样的方式叫做管道，管道中的数据就是流 `stream`
+
+##### 重定向 `>` `>>`
+
+**重定向到文件时，没有文件会默认新建，有则会覆盖**
+
+标准输出使用 `>` 或 `>>` (标准输出符是1)
+
+`ls > dir.txt` 将目录信息从定向到文件 `dir.txt` 中保存
+
+`groups >> log` 将群组信息追加到 `log` 文件末尾
+
+标准错误输出使用 `2>` （标准错误输出符是2)
+
+`cp not_exist_file file 2> err_log` 将错误信息输出至 `err_log` 文件中
+
+`cp file file > log 2> err_log` 成功输出至 `log` ，若失败则错误信息输出至 `err_log` 文件中
+
+`cp file file > log 2>> err_log` 成功输出至 `log` ，若失败则错误信息追加至 `err_log` 文件中
+
+`cp file file > log 2>&1 err_log` 成功输出至 `log` ，若失败也将错误信息输出至 `err_log` 文件中； `2>&1` 表示标准错误输出与标准输出一致
+
+`cp file file >> log 2>&1 err_log` 追加只改变标准输出就可以 `>>`
+
+
+
+#### 文本编辑器 vim
+
+`vim` 是一个 `linux` 常用的文本编辑器之一，具有强大的快捷键操作功能。
+
+`vimtutor` 命令可以进去 `vim` 的教程进行学习
+
+
+
+`vim` 快捷键：
+
+`h` 向左移动光标
+
+`l` 向右移动光标
+
+`j` 向下移动光标
+
+`k` 向上移动光标
+
+`x` 删除光标所在的字符
+
+`i` 在光标所在字符位置插入
+
+`a` 在光标所在字符后插入
+
+`A` 在行尾插入
+
+`o` 在光标下方新起一行插入
+
+`O` 在光标上方新起一行插入
+
+`r` 替换光标所在字符
+
+`R` 连续替换模式
+
+`dw` 删除单词，从光标位置直到下一个单词起始处
+
+`de` 删除从光标直到单词末尾，包括最后一个字符
+
+`d$` 从光标删除到行末
+
+`d2w` 删除后 `2` 个单词
+
+`cw` 删除单词，从光标位置直到下一个单词起始处，并进入编辑模式
+
+`ce` 删除从光标直到单词末尾，包括最后一个字符，并进入编辑模式
+
+`c$` 从光标删除到行末，并进入编辑模式
+
+`w` 移动到下一个单词的开始
+
+`2w` 移动到  `2` 个单词后的开始
+
+`e` 移动到下一个单词的末尾
+
+`3e` 移动到  `3` 个单词后的末尾
+
+`0` 移动到行首
+
+`$` 移动到行尾
+
+`dd` 删除一行
+
+`2dd` 删除 `2` 行
+
+`u` 撤销最后的操作命令
+
+`U` 撤销整行的修改
+
+`ctrl+r`  重做被撤消的命令
+
+`ctrl+g` 显示光标所在行位置以及文件状态信息
+
+`G` 跳转文件最后一行
+
+`gg` 跳转文件第一行
+
+`30G` 跳转到第 `30` 行
+
+`ctrl+o` 跳回较旧位置
+
+`ctrl+i` 跳回较新位置
+
+`/word` 搜索，按 `n` 搜索下一个，`N` 搜索上一个
+
+`?word` 向上搜索
+
+`%` 查找匹配的括号
+
+`:s/old/new` 在一行内的第一个 `old` 替换成 `new`
+
+`:s/old/new/g` 在一行内所有 `old` 替换成 `new`
+
+`:5,10s/old/new` 指定 `5` 到 `10` 行
+
+`:%s/old/new/g` 全文替换所有 `old` 为 `new`
+
+`:%s/old/new/gc` 在替换时提示是否替换
+
+`:!ls` 执行外部命令 `ls`，按 `enter` 返回 `vim`
+
+`:w file.txt` 以 `file.txt` 文件名保存
+
+`v` 进入选择模式，按 `:` 确认选择。可以将所选文本保存成文件 `:'<,'>w file.txt`
+
+`:r fileName` 从光标处插入文件内容
+
+`:r !ls` 还可以插入外部命令的输出
+
+`y` 复制 `v` 模式选择的文本
+
+`yw` 复制一个单词
+
+`ye` 复制光标处到单词结尾的字符
+
+`yy` 复制一行
+
+`p` 在光标处粘贴
+
+`:set ic` 忽略搜索大小写
+
+`:set noic` 启用搜索大小写
+
+`:set hls` 高亮搜索结果
+
+`:set is` 找短语时显示部分匹配
+
+`f1` 打开帮助，`ctrl+w ctrl+w` 切换窗口
+
+`:help` 打开帮助
+
+`:help a` 查看某指令的帮助
+
+
+
+新建 `vim ~/.vimrc` 文件，插入默认配置：`:r $VIMRUNTIME/vimrc_example.vim`
+
+
+
+vim 的插件管理：[vim-plug](https://github.com/junegunn/vim-plug)
+
+### 用户与群组
+
+`sudo` 以 `root` 用户运行命令 *`substitute user do`*
+
+- `sudo su` 切换为 `root` 用户
+- `-i` 切换到家目录
+
+
+
+`su` 切换用户
+
+- `su` 切换为 `root` 用户
+- `su user1` 切换为 `user1` 用户
+
+- `su -` 切换为 `root` 用户并切换到 `root` 的家目录
+
+
+
+`useradd` 添加用户
+
+- `useradd tom` 创建用户
+
+
+
+`passwd` 操作用户密码
+
+- `passwd user1` 修改user1用户的密码
+
+
+
+`userdel` 删除用户
+
+- `userdel user1` 删除user1用户
+- `-r` `—remove` 删除用户的 `home` 目录
+
+
+
+`groups` 获取用户群组
+
+- `groups user1` 获取用户user1的群组
+
+
+
+`groupadd` 添加群组
+
+- `groupadd group1` 添加一个叫 `group1` 的群组
+
+
+
+`groupdel` 删除群组
+
+- `groupdel group1` 删除 `group1` 群组
+
+
+
+`usermod` 修改用户账户
+
+- `usermod -g group1 user1`  将用户user1添加进group1群组
+- `usermod -G group1,group2 user1`  将用户user1添加进group1、group2群组
+- `-l` 对用户重命名 (用户的家目录名称不会修改)
+- `-g` 修改用户所在群组
+- `-G` 修改多个群组 群组名之间用逗号分隔
+-  `-a` 追加到用户组，会将用户保留在原有的组里；需要时用 `-G`，例如`-aG`
+
+
+
+`chown` 改变文件的所有者 *`change owner`*
+
+-  `chown user1 file1` 将文件 `file1` 的所有者变为 `user1`
+- `chown user1:group1 file1` 将文件 `file1` 的所有者改为 `user1`，文件的群组改为 `group1`
+- `-R` 递归设置子目录和子文件
+
+
+
+`chgrp` 改变文件的群组 `change group`
+
+-  `chown group1 file1` 将文件 `file1` 的群组变为 `group1`
+- `-R` 递归设置子目录和子文件
+
+
+
+## 权限
+
+### 权限符
+
+根目录下输入 `ls -l` ，会显示所有文件以及其信息，其中类似这样的 `drwxr-xr-x.` 文件信息，代表文件访问权限符
+
+| 权限符号 | 含义        | 代表权限             |
+| -------- | ----------- | -------------------- |
+| d        | *directory* | 表示文件是目录       |
+| l        | *link*      | 表示文件是链接       |
+| r        | *read*      | 可读权限             |
+| w        | *write*     | 可写和可删除权限     |
+| x        | *execute*   | 可执行权限           |
+| .        |             | 安全标签             |
+| -        |             | 普通文件或无相应权限 |
+
+一个完整的文件权限的表示方式：
+
+<table>
+  <tr>
+  	<td></td>
+  	<td>文件属性</td>
+  	<td colspan="3">所有者权限</td>
+  	<td colspan="3">群组用户</td>
+  	<td colspan="3">其他用户</td>
+  	<td colspan="3">安全标签</td>
+  </tr>
+  <tr>
+  	<td>权限符</td>
+  	<td>d, l, -</td>
+  	<td>r</td>
+  	<td>w</td>
+  	<td>x</td>
+  	<td>r</td>
+  	<td>w</td>
+  	<td>x</td>
+  	<td>r</td>
+  	<td>w</td>
+  	<td>x</td>
+  	<td>.</td>
+  </tr>
+  <tr>
+  	<td>权限值</td>
+  	<td></td>
+  	<td>4</td>
+  	<td>2</td>
+  	<td>1</td>
+  	<td>4</td>
+  	<td>2</td>
+  	<td>1</td>
+  	<td>4</td>
+  	<td>2</td>
+  	<td>1</td>
+  	<td></td>
+  </tr>
+</table>
+
+例如表示一个文件的权限就是这样：`drwxrwx---.` ，指明这是一个目录文件，所有者对此文件可读可写可执行，群组用户也可读可写可执行，其他用户没有任何权限。
+
+权限符对应的值进行相加就是文件的权限
+
+>  除普通用户外，`root` 用户拥有系统最高权限，也就是拥有文件的所有权限。
+
+
+
+### 修改文件的权限
+
+`chmod` 命令可以修改文件的权限 *`change mode`*
+
+
+
+将权限对应的值相加就是文件的权限：
+
+| 权限 | 值   | 计算方式 |
+| ---- | ---- | -------- |
+| ---  | 0    | 0+0+0    |
+| —x   | 1    | 0+0+1    |
+| -w-  | 2    | 0+2+0    |
+| -wx  | 3    | 0+2+1    |
+| r--  | 4    | 4+0+0    |
+| r-x  | 5    | 4+0+1    |
+| rw-  | 6    | 4+2+0    |
+| rwx  | 7    | 4+2+1    |
+
+#### 1. 通过权限值修改
+
+例如对文件分配权限 `777`，表示 `用户|群组|其他用户` 权限分别为 `7`，所以执行命令 `chmod 777 file` ，文件权限将变为：`rwxrwxrwx`
+
+#### 2. 通过权限符修改
+
+通过权限符可以细粒度的控制不同用户的权限
+
+通过组合用户、修改行为、权限符，来修改一个文件的权限：
+
+用户：
+
+| 所属用户 user | 群组 group | 其他用户 other |
+| ------------- | ---------- | -------------- |
+| u             | g          | o              |
+
+修改行为：
+
+| 赋予权限 | 添加权限 | 删除权限 |
+| -------- | -------- | -------- |
+| =        | +        | -        |
+
+权限码：
+
+| 可读 read | 可写 write | 可执行 execute |
+| --------- | ---------- | -------------- |
+| r         | w          | x              |
+
+
+
+组合之后可以修改文件权限了：
+
+- `chmode u+rw file1` 增加所属用户的读写权限
+- `chmode g-w file1` 去除群组的写权限
+- `chmod o=- file1` 设置其他用户无任何权限
+- `chmod u=rw,g=rw file1` 同时设置多种权限
+- `-R` 递归修改所有子目录和文件
+
+
+
+
+
+## 系统管理
+
+### 进程管理
+
+`w` 显示系统运行时间，负载，以及正在登录的用户
+
+`uptime` 显示系统运行时长
+
+`toload` 显示负载变化图
+
+`who` 显示登录中的 用户
+
+
+
+`ps` 查看进程 *`process status`*
+
+- `-ef` 列出所有用户的所有进程
+- `-u` 指定列出某用户
+- `-aux` 根据cpu和内存使用率过滤
+  - `--sort` 排序
+    - `-aux --sort -pcpu` 根据cpu使用率排序
+    - `-aux --sort -pmem` 根据内存使用率排序
+
+
+
+`top` 进程的动态列表
+
+`top` 面板的快捷键：
+
+- `q` 退出
+- `h` 帮助
+- `f` 编辑表头、排序
+- `u` 筛选用户
+- `k` 结束进程
+- `s` 改变刷新时间
+
+`htop` 是一款比 `top` 命令功能更多的终端工具
+
+安装 `htop`：
+
+1. `yum install -y epel-release`
+2. `yum install htop -y`
+
+
+
+`kill` 终止某个进程
+
+- `kill PID ...` 结束进程ID
+- `kill -9 PID` 立即结束进程；`-9` 是一个命令参数
+
+
+
+`halt` 关闭系统
+
+`reboot` 重启系统
+
+`shutdown` 执行重启、关机等操作
+
+`poweroff` 关机，普通用户也可以使用
+
+
+
+`&` 命令结束加 `&`，可以让进程在后台运行，终端关闭进程就会关闭
+
+- `find tom &` 在后台搜索，可以继续输入命令
+
+
+
+`nohup` 进程与终端分离，关闭终端也不会终止进程 *`no hangup`*
+
+`bg` 将前台进程或后台暂停的进程转至后台运行，或将最近一次转到后台运行的程序转至前台运行
+
+`fg` 将后台进程转至前台运行
+
+`jobs` 查看后台信息
+
+
+
+进程状态：
+
+1. `r` 运行中
+2. `s` 休眠中，终端
+3. `d` 不可终端
+4. `z` 僵死
+5. `t` 停止
+
+
+
+### 远程登录
+
+`ssh` 可以远程登录主机
+
+- `ssh root@192.169.0.100` 登录主机名为 `192.168.0.100` 的主机，用户名为 `root`，也就是登录 `root` 用户，之后会要求输入密码验证
+
+配置客户机的 `ssh` 配置，可以方便的登录主机：
+
+1. 打开 `~/.ssh/` 目录下 `config` 文件；如果没有可以新建 `config`；如果没有 `.ssh` 目录，可以执行 `ssh localhost` 生成
+
+2. 配置主机信息：
+
+   ```
+   Host serverName
+     HostName 192.168.0.100
+     Post 22
+     User root
+   ```
+
+3. 配置保存后，执行 `ssh serverName` 就可以自动连接主机 `roor` 账户了
+
+
+
+### 免密登录
+
+通过设置秘钥可以实现免密登录：
+
+1. 生成本地秘钥：`ssh-keygen`；相当于：`ssh-keygen -t rsa`，公钥秘钥默认生成在 `~/.ssh/` 目录下
+2. 将公钥传输到服务器：`ssh-copy-id root@192.168.0.100`，然后输入主机密码即可。这个命令相当于执行了 `ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.0.100`，作用是将本机公钥追加到服务器的 `~/.ssh/authorized_keys` 文件中，在登录时进行验证。
+3. 设置完毕直接登录主机 `ssh root@192.168.0.100` 就可以免密码登录主机了
+
+> 设置了免密登录后使用密码登录：`ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no root@192.168.0.100`
+
+
+
+
+
+## 快捷键
+
+`ctrl+d` 给终端传递 *`EOF(end of file)`*，退出终端或账号
+
+`ctrl+l` 清屏
+
+`ctrl+a` 光标跳转命令开头
+
+`ctrl+e` 光标跳转命令结尾
+
+`ctrl+u` 删除光标左侧所有字符
+
+`ctrl+k` 删除光标右侧所有字符
+
+`ctrl+w` 删除光标左侧的一个单词
+
+`ctrl+y` 粘贴 `ctrl+u` `ctrl+k` `ctrl+w` 删除的内容
+
+`ctrl+c` 终止当前程序
+
+`ctrl+z` 将进程转到后台挂起，暂停运行
+
+
+
+## 系统文件目录摘要
+
+`/ ` 表示根目录
+
+`.` 表示当前目录
+
+`..` 表示上一级目录
+
+`~` 当前用户的 `home` 目录
+
+`/bin` 存放二进制文件 *`binary`*
+
+`/sbin` 存放系统二进制文件，包含重要的可执行程序    *`system bin`*
+
+`/boot` 系统启动相关文件的目录
+
+`/dev` 保存了外设与驱动器文件的目录 *`device`*
+
+`/etc` 存放了一些配置文件与其他零零碎碎的文件
+
+`/home` 用户的私人目录
+
+`/lib` 程序调用的库文件  *`library`*
+
+`/media` 访问外设媒体的目录
+
+`/mnt` 临时挂载一些装置 *`mount`*
+
+`/opt` 表示可选的应用软件包，用于安装第三方软件及插件 *`optional application software package`*
+
+`/root` 超级用户的 `home` 目录
+
+`/srv`  网络服务相关的目录 *`service`*
+
+`/tmp` 临时文件存放的目录
+
+`/usr` 操作系统软件资源，这里有用户大量要调用的程序 *`Unix software resource `*
+
+`/var`  包含程序的数据日志记录文件等 *`variable`*
+
+- `*.log` 日志记录文件
+
+
+
+## linux的软件
+
+### 软件与源
+
+因为linux是一个开源的系统，他都软件也都是开源的，世界上有许多个服务器作为软件仓库存放了linux的软件可供使用，我们可以切换任意的[仓库源](https://www.centos.org/download/mirrors/)去下载。
+
+`/ect/yum.repos.d/CentOS-Base.repo`  这个文件配置了仓库的地址，为了达到更快的下载速度，我们可以找到国内比较好的源来替换这个文件：
+
+阿里巴巴：https://developer.aliyun.com/mirror/centos?spm=a2c6h.13651102.0.0.3e221b11BPhjUY
+
+华为：https://mirrors.huaweicloud.com/
+
+网易：[http://mirrors.163.com/.help/centos.html](http://mirrors.163.com/.help/centos.html)
+
+清华大学：https://mirrors.tuna.tsinghua.edu.cn/help/centos/
+
+
+
+### 使用yum管理软件
+
+`yum` 是linux的包管理工具，可以方便的下载、卸载和更新系统软件包
+
+
+
+`yum update` 和 `yum updrade` 可以更新本地安装的软件，`upgrade` 会删除原有的软件包再更新
+
+`yum update <pkg-name>` 更新指定软件包
+
+`yum search <pkg-name>` 搜索软件包
+
+`yum install <pkg-name>` 安装软件包
+
+`yum remove <pkg-name>` 删除软件包
+
+
+
+也可以下载 `.rpm` 格式的软件包，用 `rpm` 命令本地安装：
+
+`rpm -i <pkg-name.rpm>` 安装本地软件包
+
+还可以用 `yum` 命令安装：
+
+`yum localinstall <pkg-name.rpm>`
+
+`rpm -e <pkg-name>` 卸载包
+
+
+
+## 使用手册
+
+1. `man` 命令可以阅读手册获取帮助信息 `manual`
+
+   安装手册 `yum install man-pages`
+
+   更新手册 `mandb`
+
+   查询命令手册 `man <command>`
+
+2. 大多数命令的 `--help` 参数可以获取简要的帮助信息
+
+   查看命令的帮助信息 `ls --help`
+
+3. `wathis <command>` 获取一个命令的简要信息
+
+4. 在不知道命令是什么的时候，可以搜索关键字来查找命令：`apropos <keyword>`
+
