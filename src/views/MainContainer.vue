@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import sideNav from '@/components/sideNav'
+import sideNav from '@/components/SideNav'
 import types from '@/store/mutations'
 import { mapState } from 'vuex'
 

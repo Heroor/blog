@@ -30,6 +30,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 - [x] refactor mdjs-loader
 - [x] introduction of vConsole
 - [x] introduction of vuex
+- [x] deploy blog with CI
 - [ ] markdown sidebar
 - [ ] introduction of ts
 - [ ] add theme feat
