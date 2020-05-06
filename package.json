@@ -1,8 +1,9 @@
 {
-  "name": "new-blog",
+  "name": "blog",
   "version": "1.0.0",
-  "description": "bener's blog",
+  "description": "Bener's blog",
   "author": "Bener <2388697970@qq.com>",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -28,6 +29,7 @@
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
+    "cz-conventional-changelog": "^3.2.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
@@ -67,5 +69,10 @@
     "last 2 versions",
     "not ie <= 8"
   ],
-  "homepage": "https://heroor.github.io/blog"
+  "homepage": "https://heroor.github.io/blog",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
