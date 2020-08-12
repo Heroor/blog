@@ -9,7 +9,7 @@ export default {
           <br/>
           <br/>
           <br/>
-          既然来了，那就送你一个导航 <a href="hello-nav.github.io">hello-nav.github.io</a>，你一定会喜欢它的
+          既然来了，那就送你一个导航 <a href="https://hello-nav.github.io">hello-nav.github.io</a>，你一定会喜欢它的
         </div>
       </div>
     )
