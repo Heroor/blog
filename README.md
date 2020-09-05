@@ -25,12 +25,12 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## TODO:
 - [x] change all template to jsx
-- [ ] img-blur-loading
+- [x] img-blur-loading
 - [x] refactor common css to stylus
 - [x] refactor mdjs-loader
 - [x] introduction of vConsole
 - [x] introduction of vuex
 - [x] deploy blog with CI
-- [ ] markdown sidebar
+- [x] markdown sidebar
 - [ ] introduction of ts
 - [ ] add theme feat
