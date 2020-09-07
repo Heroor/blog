@@ -5,7 +5,11 @@ export default {
       <div class="info__wrap" key="about">
         <h2 class="info__title m-b--40">About this blog</h2>
         <div class="info__container">
-          bener写字的地方。
+          这里是 Bener 写字的地方。
+          <br/>
+          <br/>
+          <br/>
+          既然来了，那就送你一个导航 <a href="hello-nav.github.io">hello-nav.github.io</a>，你一定会喜欢它的
         </div>
       </div>
     )
