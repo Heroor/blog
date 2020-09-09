@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <circle cx="25" cy="25" r="25" fill="#2196F3">
+    <animateMotion from="0,0" to="100,100" dur="1s" fill="freeze" />
+  </circle>
+</svg>

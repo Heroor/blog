@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <line
+    x1="10"
+    y1="50"
+    x2="200"
+    y2="50"
+    stroke="#555"
+    stroke-width="3"
+  >
+  </line>
+</svg>

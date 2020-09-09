@@ -1,0 +1,12 @@
+{
+  "name": "blog-server",
+  "version": "1.0.0",
+  "description": "blog-server",
+  "main": "blog-server",
+  "author": "bener",
+  "license": "MIT",
+  "dependencies": {
+    "connect-history-api-fallback": "^1.6.0",
+    "express": "^4.17.1"
+  }
+}
