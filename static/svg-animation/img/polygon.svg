@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+<polygon
+  points="10,10 120,10 120,120 80,150 10,120"
+  fill="pink"
+  stroke-width="2"
+  stroke="red"
+>
+</polygon>
+</svg>

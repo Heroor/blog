@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <rect fill="#2196F3" x="10" width="20" height="100">
+    <animate
+      attributeName="width"
+      attributeType="XML"
+      to="300"
+      begin="0s"
+      dur="3s"
+      repeatCount="indefinite"
+    ></animate>
+    <animate
+      attributeName="fill"
+      attributeType="XML"
+      to="#F44336"
+      begin="0s"
+      dur="3s"
+      repeatCount="indefinite"
+    ></animate>
+  </rect>
+</svg>

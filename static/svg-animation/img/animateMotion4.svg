@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200">
+  <path id="path"
+    fill="none"
+    stroke="red"
+    d="M3,95.26C69.71,25.41,54.05,2.91,28.87,15.32S9.13,65.77,52.69,95.26s21.78-63.64,64.67-89.25 s93.26,97.78,90.53,103.99">
+  </path>
+
+  <circle r="5" fill="#2196F3">
+    <animateMotion dur="5s" repeatCount="indefinite">
+      <mpath href="#path"/>
+    </animateMotion>
+  </circle>
+</svg>

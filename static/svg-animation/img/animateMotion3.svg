@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" >
+  <rect width="50" height="50" fill="#F44336">
+    <animateMotion
+      path="M3,52.98c47.18-38,36.11-50.25,18.3-43.49S7.33,36.93,38.15,52.98S53.56,18.35,83.89,4.42
+	s65.96,53.2,64.04,56.58"
+      dur="3s"
+      repeatCount="indefinite" />
+  </rect>
+</svg>
