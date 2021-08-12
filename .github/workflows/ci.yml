@@ -13,10 +13,8 @@ jobs:
       uses: actions/checkout@master
 
     - name: Build and Deploy
-      uses: avinal/github-pages-deploy-action@v0.9
+      uses: sterlingwes/gh-pages-deploy-action@v1.1
       with:
-        GITHUB_TOKEN: ${{ secrets.gitToken }}
-        LANGUAGE: node
-        PAGES_BRANCH: gh-pages
-        DOCS_FOLDER: dist
-        MAKE_COMMAND: npm install && npm run build
+        access-token: ${{ secrets.gitToken }}
+        source-directory: dist
+        build-command: npm install && npm run build
