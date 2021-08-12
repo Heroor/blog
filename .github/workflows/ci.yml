@@ -14,8 +14,9 @@ jobs:
 
     - name: Build and Deploy
       uses: avinal/github-pages-deploy-action@v0.9
-      env:
-        ACCESS_TOKEN: ${{ secrets.gitToken }}
-        BRANCH: gh-pages
-        FOLDER: dist
-        BUILD_SCRIPT: npm install && npm run build
+      with:
+        GITHUB_TOKEN: ${{ secrets.gitToken }}
+        LANGUAGE: node
+        PAGES_BRANCH: gh-pages
+        DOCS_FOLDER: dist
+        MAKE_COMMAND: npm install && npm run build
