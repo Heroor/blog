@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v1
 
     - name: Build and Deploy
       uses: sterlingwes/gh-pages-deploy-action@v1.1
       with:
-        access-token: ${{ secrets.gitToken }}
+        access-token: ${{ secrets.ACCESS_TOKEN }}
         source-directory: dist
         build-command: npm install && npm run build
